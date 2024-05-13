@@ -1,30 +1,37 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
+import {Button} from "./Button";
 
-type CounterType = {
-    // setCount: (value: number) => void
-    // originalValue: number
-    // callBack: () => void
-    originalValue: number
-}
+export const Counter = () => {
 
-export const Counter = (props: CounterType) => {
+    const [number, setNumber] = useState(0);
 
-    // let [count, setCount] = useState(0)
+    const maxValue = 5;
+    const ifNumberGreaterMaxValue = number === maxValue;
 
-    // const increaseNumber = () => {
-    //     let newCount = count++;
-    //     setCount(newCount)
-    //
-    // }
+    const onClickButtonIncHandler = () => {
+        setNumber(number + 1)
+    }
 
-
-    // const onChangeCounterHandler = (event: ChangeEvent<number>) => {
-    //     props.setCount(event.currentTarget)
-    // }
+    const onClickButtonResetHandler = () => {
+        setNumber(0)
+    }
 
     return (
-        <div>
-            {props.originalValue}
+        <div className="counter">
+            {/*<div className={number === maxValue ? "final-state-counter" : "counter-display"}>{number}</div>*/}
+            <div className={`counter-display ${ifNumberGreaterMaxValue ? "red" : ""}`}>{number}</div>
+            <div className="buttons">
+                <Button title={"inc"}
+                        callBack={onClickButtonIncHandler}
+                        disabled={ifNumberGreaterMaxValue}
+                        className="button"
+                />
+                <Button title={"reset"}
+                        callBack={onClickButtonResetHandler}
+                        disabled={number === 0}
+                        className="button"
+                />
+            </div>
         </div>
     );
 };
