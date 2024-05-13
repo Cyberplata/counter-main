@@ -20,7 +20,7 @@
 
     background-color: #00f8ff;
     border: 3px solid #00f8ff;
-    border-radius: 5px;
+    border-radius: 8px;
     padding: 20px;
     margin: 20px;
     font-size: 50px;
@@ -39,14 +39,28 @@
     padding: 20px;
     border: 3px solid #00f8ff;
     background-color: #5d5d5d;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .button {
     font-size: 30px;
     font-weight: bold;
     font-style: italic;
+    border-radius: 8px;
+    background-color: #00f8ff;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border-color 0.3s ease;
+    /*outline: none;*/
 }
+
+.button:active {
+    border-color: black; /* Добавлено */
+}
+
+/*.button:active, .button:focus {*/
+/*    border-color: black; !* Добавлено *!*/
+/*}*/
 
 
 /*.final-state-counter {*/
