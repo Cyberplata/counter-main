@@ -9,12 +9,8 @@ type ButtonPropsType = {
 
 export const Button = ({title, callBack, disabled, className}: ButtonPropsType) => {
 
-    const onClickButtonHandler = () => {
-        callBack()
-    }
-
-    return <button onClick={onClickButtonHandler}
+    return <button onClick={callBack}
                    disabled={disabled}
-                   className={className}
+                   className={`button ${className ? className : ''}`}
     >{title}</button>
 };

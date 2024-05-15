@@ -3,7 +3,7 @@ import {Button} from "./Button";
 
 export const Counter = () => {
 
-    const [number, setNumber] = useState(0);
+    const [number, setNumber] = useState<number>(0);
 
     const maxValue = 5;
     const ifNumberGreaterMaxValue = number === maxValue;
@@ -24,12 +24,12 @@ export const Counter = () => {
                 <Button title={"inc"}
                         callBack={onClickButtonIncHandler}
                         disabled={ifNumberGreaterMaxValue}
-                        className="button"
+
                 />
                 <Button title={"reset"}
                         callBack={onClickButtonResetHandler}
                         disabled={number === 0}
-                        className="button"
+
                 />
             </div>
         </div>
