@@ -2,14 +2,14 @@ import React from 'react';
 
 type ButtonPropsType = {
     title: string
-    callBack: () => void
+    onClick: () => void
     disabled?: boolean
     className?: string
 }
 
-export const Button = ({title, callBack, disabled, className}: ButtonPropsType) => {
+export const Button = ({title, onClick, disabled, className}: ButtonPropsType) => {
 
-    return <button onClick={callBack}
+    return <button onClick={onClick}
                    disabled={disabled}
                    className={`button ${className ? className : ''}`}
     >{title}</button>
