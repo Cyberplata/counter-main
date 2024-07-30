@@ -30,8 +30,14 @@ export const Counter = ({title, type, counterState, setCounterState}: CounterTyp
 
     return (
         <div className="counter">
-            <h3>{title}</h3>
+            <h3 className="title">{title}</h3>
             <div>
+                {/*<CounterTypeSettings*/}
+                {/*    counterState={counterState}*/}
+                {/*    setCounterState={setCounterState}*/}
+                {/*/>*/}
+                {/*<CounterTypeUser counterState={counterState} setCounterState={setCounterState}/>*/}
+
                 {
                     type === "settings" && (
                         <CounterTypeSettings counterState={counterState} setCounterState={setCounterState}/>

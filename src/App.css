@@ -6,7 +6,7 @@
     box-sizing: border-box;
     height: 100vh;
 
-    gap: 150px;
+    gap: 130px;
 }
 
 .counter {
@@ -51,6 +51,17 @@
 /*}*/
 .inputSettings {
     margin-left: 20px;
+    text-align: center;
+    font-size: 20px;
+    max-width: 200px;
+}
+.inputSettings.red {
+    margin-left: 20px;
+    text-align: center;
+    color: black;
+    background-color: #f88f8f;
+    border: 3px solid red;
+    border-radius: 5px;
 }
 
 .counter-display.red {
@@ -87,3 +98,12 @@
     border-color: black; /* Добавлено */
 }
 
+.title {
+    color: white;
+    text-align: center;
+}
+
+.error {
+    color: #fa3b3b;
+    font-size: 20px;
+}

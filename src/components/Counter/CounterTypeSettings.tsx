@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Button} from "../Button";
 import {CounterStateType} from "../../App";
 
@@ -15,9 +15,36 @@ export const CounterTypeSettings = ({
     const [maxValue, setMaxValue] = useState<number>(counterState.maxValue);
     const [startValue, setStartValue] = useState<number>(counterState.startValue);
 
-    const settingsButtonDisabled = startValue < 0
-        || startValue === maxValue
-        || startValue > maxValue
+    const settingsButtonDisabledAndIncorrectInput =
+           startValue < 0
+        || startValue >= maxValue
+        // || startValue > maxValue
+
+    const checkingIncorrectValuesInput = () => {
+        if (startValue < 0 || startValue >= maxValue) {
+            setCounterState({
+                ...counterState, error: "Incorrect value!"
+            })
+        }
+        // if (counterState.error !== "Incorrect value!" && !!counterState.countUser) {
+        //     setCounterState({
+        //         ...counterState, error: "enter values and press 'set'"
+        //     })
+        // }
+        else {
+            setCounterState({
+                ...counterState, error: ""
+            })
+        }
+    }
+
+    useEffect(() => {
+        checkingIncorrectValuesInput()
+    },[maxValue, startValue])
+
+    // useEffect(() => {
+    //
+    // },[])
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         const newMaxValue = Number(e.currentTarget.value);
@@ -38,7 +65,7 @@ export const CounterTypeSettings = ({
     }
 
     const onClickButtonSetHandler = () => {
-        debugger
+        // debugger
         setCounterState({
             ...counterState,
             countUser: startValue,
@@ -47,18 +74,27 @@ export const CounterTypeSettings = ({
         });
     }
 
+
     return (
         <div>
             <div className={"counter-display settings"}>
                 <label>max value:
-                    <input className={"inputSettings"} type="number" value={maxValue} onChange={onChangeMaxValue}/>
+                    <input className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
+                           type="number"
+                           value={maxValue}
+                           onChange={onChangeMaxValue}
+                    />
                 </label>
                 <label>start value:
-                    <input className={"inputSettings"} type="number" value={startValue} onChange={onChangeStartValue}/>
+                    <input className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
+                           type="number"
+                           value={startValue}
+                           onChange={onChangeStartValue}
+                    />
                 </label>
             </div>
             <div className="buttons">
-                <Button title={"set"} onClick={onClickButtonSetHandler} disabled={settingsButtonDisabled}/>
+                <Button title={"set"} onClick={onClickButtonSetHandler} disabled={settingsButtonDisabledAndIncorrectInput}/>
             </div>
         </div>
     );

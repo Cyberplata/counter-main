@@ -8,7 +8,17 @@ type CounterTypeUserType = {
 }
 
 export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUserType) => {
-    const ifNumberGreaterMaxValue = counterState.countUser === counterState.maxValue;
+    const checkingIncorrectValuesInc =
+        counterState.startValue < 0 ||
+        counterState.countUser >= counterState.maxValue ||
+        // counterState.startValue === counterState.maxValue ||
+        counterState.startValue >= counterState.maxValue
+    ;
+
+    const checkingIncorrectValuesReset =
+        counterState.countUser === counterState.startValue ||
+        counterState.startValue < 0 ||
+        counterState.startValue >= counterState.maxValue
 
     const onClickButtonIncHandler = () => {
         if (counterState.countUser < counterState.maxValue) {
@@ -17,23 +27,30 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
     }
 
     const onClickButtonResetHandler = () => {
-        setCounterState({...counterState, countUser: counterState.startValue});
+        setCounterState({...counterState, countUser: 0});
     }
 
     return (
         <div>
-            <div>Current count: {counterState.countUser}</div>
-            
-            <div className={`counter-display ${ifNumberGreaterMaxValue ? "red" : ""}`}>{counterState.countUser}</div>
+            {counterState.error
+                ? <div className={"counter-display"}>
+                    <div className={"error"}>{counterState.error}</div>
+                </div>
+                : <div className={`counter-display ${checkingIncorrectValuesInc 
+                        ? "red" 
+                        : ""}`}
+                >{counterState.countUser}</div>
+            }
+
             <div className="buttons">
                 <Button title={"inc"}
                         onClick={onClickButtonIncHandler}
-                        disabled={ifNumberGreaterMaxValue}
+                        disabled={checkingIncorrectValuesInc}
 
                 />
                 <Button title={"reset"}
                         onClick={onClickButtonResetHandler}
-                        disabled={counterState.countUser === counterState.startValue}
+                        disabled={checkingIncorrectValuesReset}
                 />
             </div>
         </div>

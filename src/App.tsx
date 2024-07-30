@@ -13,6 +13,7 @@ export type CounterStateType = {
     countUser: number
     maxValue: number
     startValue: number
+    error: string
 }
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
             countUser: 0,
             maxValue: 5,
             startValue: 0,
+            error: ""
         }
     )
 
@@ -43,6 +45,12 @@ const App = () => {
                                 setCounterState={setCounterState}
                 />
             })}
+
+            {/*<CounterTypeSettings*/}
+            {/*    counterState={counterState}*/}
+            {/*    setCounterState={setCounterState}*/}
+            {/*/>*/}
+            {/*<CounterTypeUser counterState={counterState} setCounterState={setCounterState}/>*/}
         </div>
     );
 };
