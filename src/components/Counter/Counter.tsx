@@ -1,27 +1,30 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {CounterTypeSettings} from "./CounterTypeSettings";
 import {CounterTypeUser} from "./CounterTypeUser";
+import {CounterStateType} from "../../App";
 
 
 type CounterType = {
     displayId: string
     title: string
     type: 'settings' | 'user'
+    counterState: CounterStateType
+    setCounterState: (counterState: CounterStateType) => void
 }
 
-export type CounterStateType = {
-    countUser: number
-    maxValue: number
-    startValue: number
-}
+// export type CounterStateType = {
+//     countUser: number
+//     maxValue: number
+//     startValue: number
+// }
 
-export const Counter = ({title, type}: CounterType) => {
-    const [counterState, setCounterState] = useState<CounterStateType>({
-            countUser: 0,
-            maxValue: 5,
-            startValue: 0,
-        }
-    )
+export const Counter = ({title, type, counterState, setCounterState}: CounterType) => {
+    // const [counterState, setCounterState] = useState<CounterStateType>({
+    //         countUser: 0,
+    //         maxValue: 5,
+    //         startValue: 0,
+    //     }
+    // )
 
     // const maxValue = 5;
 

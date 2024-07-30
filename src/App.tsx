@@ -9,6 +9,12 @@ export type DisplaysType = {
     type: 'settings' | 'user'
 }
 
+export type CounterStateType = {
+    countUser: number
+    maxValue: number
+    startValue: number
+}
+
 const App = () => {
 
     let displayId1 = v1()
@@ -19,10 +25,23 @@ const App = () => {
         {id: displayId2, title: "User's display counter", type: 'user'},
     ])
 
+    const [counterState, setCounterState] = useState<CounterStateType>({
+            countUser: 0,
+            maxValue: 5,
+            startValue: 0,
+        }
+    )
+
     return (
         <div className={"App"}>
             {displays.map(el => {
-                return <Counter key={el.id} displayId={el.id} title={el.title} type={el.type}/>
+                return <Counter key={el.id}
+                                displayId={el.id}
+                                title={el.title}
+                                type={el.type}
+                                counterState={counterState}
+                                setCounterState={setCounterState}
+                />
             })}
         </div>
     );

@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button} from "../Button";
-import {CounterStateType} from "./Counter";
+import {CounterStateType} from "../../App";
 
 type CounterTypeSettingsType = {
     counterState: CounterStateType
