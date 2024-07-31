@@ -46,6 +46,8 @@ export const Counter = ({title, type, counterState, setCounterState}: CounterTyp
                 {
                     type === "user" && (
                         <CounterTypeUser counterState={counterState} setCounterState={setCounterState} />
+
+                        // <CounterTypeUser counterState={counterState} setCounterState={setCounterState} error={counterState.error} />
                     )
                 }
             </div>

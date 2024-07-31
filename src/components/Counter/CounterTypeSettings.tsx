@@ -79,7 +79,7 @@ export const CounterTypeSettings = ({
         <div>
             <div className={"counter-display settings"}>
                 <label>max value:
-                    <input className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
+                    <input className={`inputSettings ${startValue >= maxValue ? "red" : ""}`}
                            type="number"
                            value={maxValue}
                            onChange={onChangeMaxValue}
@@ -94,12 +94,112 @@ export const CounterTypeSettings = ({
                 </label>
             </div>
             <div className="buttons">
-                <Button title={"set"} onClick={onClickButtonSetHandler} disabled={settingsButtonDisabledAndIncorrectInput}/>
+                <Button title={"set"}
+                        onClick={onClickButtonSetHandler}
+                        disabled={settingsButtonDisabledAndIncorrectInput}
+                />
             </div>
         </div>
     );
 };
 
+
+
+
+
+//GPT
+// import React, {ChangeEvent, useState, useEffect} from 'react';
+// import {Button} from "../Button";
+// import {CounterStateType} from "../../App";
+//
+//
+// type CounterTypeSettingsType = {
+//     counterState: CounterStateType
+//     setCounterState: (counterState: CounterStateType) => void
+// }
+//
+// export const CounterTypeSettings = ({
+//                                         counterState,
+//                                         setCounterState
+//                                     }: CounterTypeSettingsType) => {
+//
+//     const [maxValue, setMaxValue] = useState<number>(counterState.maxValue);
+//     const [startValue, setStartValue] = useState<number>(counterState.startValue);
+//
+//     const settingsButtonDisabledAndIncorrectInput = startValue < 0
+//         || startValue === maxValue
+//         || startValue > maxValue
+//         || counterState.error !== "";
+//
+//     const checkingIncorrectValuesInput = () => {
+//         if (startValue < 0 || startValue >= maxValue) {
+//             setCounterState({
+//                 ...counterState,
+//                 error: "Incorrect start value!"
+//             });
+//         } else {
+//             setCounterState({
+//                 ...counterState,
+//                 error: ""
+//             });
+//         }
+//     };
+//
+//     useEffect(() => {
+//         checkingIncorrectValuesInput();
+//     }, [startValue, maxValue]);
+//
+//     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+//         const newMaxValue = Number(e.currentTarget.value);
+//         setMaxValue(newMaxValue);
+//         setCounterState({
+//             ...counterState,
+//             maxValue: newMaxValue
+//         });
+//     }
+//
+//     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+//         const newStartValue = Number(e.currentTarget.value);
+//         setStartValue(newStartValue);
+//         setCounterState({
+//             ...counterState,
+//             startValue: newStartValue
+//         });
+//     }
+//
+//     const onClickButtonSetHandler = () => {
+//         setCounterState({
+//             ...counterState,
+//             countUser: startValue,
+//             maxValue: maxValue,
+//             startValue: startValue
+//         });
+//     }
+//
+//     return (
+//         <div>
+//             <div className={"counter-display settings"}>
+//                 <label>max value:
+//                     <input className={`inputSettings ${startValue >= maxValue ? "red" : ""}`}
+//                            type="number"
+//                            value={maxValue}
+//                            onChange={onChangeMaxValue}
+//                     />
+//                 </label>
+//                 <label>start value:
+//                     <input className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
+//                            type="number"
+//                            value={startValue}
+//                            onChange={onChangeStartValue}
+//                     />
+//                 </label>
+//             </div>
+//             <div className="buttons">
+//                 <Button title={"set"} onClick={onClickButtonSetHandler} disabled={settingsButtonDisabledAndIncorrectInput}/>
+//             </div>
+//         </div>
+//     );
+// };
 
 /*
 import React, {ChangeEvent} from 'react';

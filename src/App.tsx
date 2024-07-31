@@ -14,6 +14,9 @@ export type CounterStateType = {
     maxValue: number
     startValue: number
     error: string
+    setButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "set"
+    incButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "inc"
+    resetButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "reset"
 }
 
 const App = () => {
@@ -30,7 +33,10 @@ const App = () => {
             countUser: 0,
             maxValue: 5,
             startValue: 0,
-            error: ""
+            error: "",
+            setButtonDisabled: false, // Инициализация поля для управления активностью кнопки "set"
+            incButtonDisabled: true, // Инициализация поля для управления активностью кнопки "inc"
+            resetButtonDisabled: true // Инициализация поля для управления активностью кнопки "reset"
         }
     )
 

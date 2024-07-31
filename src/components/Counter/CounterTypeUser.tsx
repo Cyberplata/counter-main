@@ -58,6 +58,64 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
 };
 
 
+
+
+//GPT
+// import React from 'react';
+// import {Button} from "../Button";
+// import {CounterStateType} from "../../App";
+//
+// type CounterTypeUserType = {
+//     counterState: CounterStateType
+//     setCounterState: (counterState: CounterStateType) => void
+//     error: string
+// }
+//
+// export const CounterTypeUser = ({counterState, setCounterState, error}: CounterTypeUserType) => {
+//     const checkingIncorrectValuesInc =
+//         counterState.startValue < 0
+//         || counterState.countUser >= counterState.maxValue
+//         || counterState.startValue >= counterState.maxValue;
+//
+//     const checkingIncorrectValuesReset =
+//         counterState.countUser === counterState.startValue
+//         || counterState.startValue < 0
+//         || counterState.startValue >= counterState.maxValue;
+//
+//     const onClickButtonIncHandler = () => {
+//         if (counterState.countUser < counterState.maxValue) {
+//             setCounterState({...counterState, countUser: counterState.countUser + 1});
+//         }
+//     }
+//
+//     const onClickButtonResetHandler = () => {
+//         setCounterState({...counterState, countUser: 0});
+//     }
+//
+//     return (
+//         <div>
+//             {error && (
+//                 <div className="error">{error}</div>
+//             )}
+//             {
+//                 <div className={`counter-display ${checkingIncorrectValuesInc ? "red" : ""}`}
+//                 >{counterState.countUser}</div>
+//             }
+//
+//             <div className="buttons">
+//                 <Button title={"inc"}
+//                         onClick={onClickButtonIncHandler}
+//                         disabled={checkingIncorrectValuesInc}
+//                 />
+//                 <Button title={"reset"}
+//                         onClick={onClickButtonResetHandler}
+//                         disabled={checkingIncorrectValuesReset}
+//                 />
+//             </div>
+//         </div>
+//     );
+// };
+
 // import React from 'react';
 // import {Button} from "../Button";
 // import {CounterStateType} from "./Counter";
