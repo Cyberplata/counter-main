@@ -16,8 +16,8 @@ export type CounterStateType = {
     error: string
     message: string // Добавлено поле для хранения сообщения
     setButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "set"
-    // incButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "inc"
-    // resetButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "reset"
+    incButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "inc"
+    resetButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "reset"
 }
 
 const App = () => {
@@ -37,8 +37,8 @@ const App = () => {
             error: "",
             message: "", // Инициализация поля для хранения сообщения
             setButtonDisabled: false, // Инициализация поля для управления активностью кнопки "set"
-            // incButtonDisabled: false, // Инициализация поля для управления активностью кнопки "inc"
-            // resetButtonDisabled: false // Инициализация поля для управления активностью кнопки "reset"
+            incButtonDisabled: false, // Инициализация поля для управления активностью кнопки "inc"
+            resetButtonDisabled: false // Инициализация поля для управления активностью кнопки "reset"
         }
     )
 

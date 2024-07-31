@@ -53,7 +53,9 @@ export const CounterTypeSettings = ({
             ...counterState,
             maxValue: newMaxValue,
             setButtonDisabled: false,
-            message: "enter values and press 'set'"
+            message: "enter values and press 'set'",
+            incButtonDisabled: true,
+            resetButtonDisabled: true
         });
     }
 
@@ -64,7 +66,9 @@ export const CounterTypeSettings = ({
             ...counterState,
             startValue: newStartValue,
             setButtonDisabled: false,
-            message: "enter values and press 'set'"
+            message: "enter values and press 'set'",
+            incButtonDisabled: true,
+            resetButtonDisabled: true
         });
     }
 
@@ -77,8 +81,8 @@ export const CounterTypeSettings = ({
             startValue: startValue,
             message: "", // Обновление сообщения после нажатия на кнопку "set"
             setButtonDisabled: true, // Обновление состояния для управления активностью кнопки "set"
-            // incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
-            // resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
+            incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
+            resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
         });
     }
 

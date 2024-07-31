@@ -52,13 +52,13 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
             <div className="buttons">
                 <Button title={"inc"}
                         onClick={onClickButtonIncHandler}
-                        disabled={checkingIncorrectValuesInc}
+                        disabled={checkingIncorrectValuesInc || counterState.incButtonDisabled}
                     // disabled={counterState.incButtonDisabled}
 
                 />
                 <Button title={"reset"}
                         onClick={onClickButtonResetHandler}
-                        disabled={checkingIncorrectValuesReset}
+                        disabled={checkingIncorrectValuesReset || counterState.resetButtonDisabled}
                     // disabled={counterState.resetButtonDisabled}
                 />
             </div>
