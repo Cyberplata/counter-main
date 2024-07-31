@@ -16,9 +16,9 @@ export const CounterTypeSettings = ({
     const [startValue, setStartValue] = useState<number>(counterState.startValue);
 
     const settingsButtonDisabledAndIncorrectInput =
-           startValue < 0
+        startValue < 0
         || startValue >= maxValue
-        // || startValue > maxValue
+    // || startValue > maxValue
 
     const checkingIncorrectValuesInput = () => {
         if (startValue < 0 || startValue >= maxValue) {
@@ -26,10 +26,10 @@ export const CounterTypeSettings = ({
                 ...counterState, error: "Incorrect value!"
             })
         }
-        // if (counterState.error !== "Incorrect value!" && !!counterState.countUser) {
-        //     setCounterState({
-        //         ...counterState, error: "enter values and press 'set'"
-        //     })
+            // if (counterState.error !== "Incorrect value!" && !!counterState.countUser) {
+            //     setCounterState({
+            //         ...counterState, error: "enter values and press 'set'"
+            //     })
         // }
         else {
             setCounterState({
@@ -40,7 +40,7 @@ export const CounterTypeSettings = ({
 
     useEffect(() => {
         checkingIncorrectValuesInput()
-    },[maxValue, startValue])
+    }, [maxValue, startValue])
 
     // useEffect(() => {
     //
@@ -51,7 +51,9 @@ export const CounterTypeSettings = ({
         setMaxValue(newMaxValue);
         setCounterState({
             ...counterState,
-            maxValue: newMaxValue
+            maxValue: newMaxValue,
+            setButtonDisabled: false,
+            message: "enter values and press 'set'"
         });
     }
 
@@ -60,7 +62,9 @@ export const CounterTypeSettings = ({
         setStartValue(newStartValue);
         setCounterState({
             ...counterState,
-            startValue: newStartValue
+            startValue: newStartValue,
+            setButtonDisabled: false,
+            message: "enter values and press 'set'"
         });
     }
 
@@ -71,10 +75,10 @@ export const CounterTypeSettings = ({
             countUser: startValue,
             maxValue: maxValue,
             startValue: startValue,
+            message: "", // Обновление сообщения после нажатия на кнопку "set"
             setButtonDisabled: true, // Обновление состояния для управления активностью кнопки "set"
-            incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
-            resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
-            message: "" // Обновление сообщения после нажатия на кнопку "set"
+            // incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
+            // resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
         });
     }
 
@@ -106,9 +110,6 @@ export const CounterTypeSettings = ({
         </div>
     );
 };
-
-
-
 
 
 //GPT

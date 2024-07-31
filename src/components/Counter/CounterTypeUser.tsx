@@ -22,23 +22,30 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
 
     const onClickButtonIncHandler = () => {
         if (counterState.countUser < counterState.maxValue) {
-            setCounterState({...counterState, countUser: counterState.countUser + 1});
+            setCounterState({
+                ...counterState,
+                countUser: counterState.countUser + 1
+            });
         }
     }
 
     const onClickButtonResetHandler = () => {
-        setCounterState({...counterState, countUser: 0});
+        setCounterState({
+            ...counterState,
+            countUser: 0,
+            setButtonDisabled: false
+        });
     }
 
     return (
         <div>
-            {counterState.error
+            {counterState.error || counterState.message
                 ? <div className={"counter-display"}>
-                    <div className={"error"}>{counterState.error}</div>
+                    <div className={`"error" ${counterState.error ? "error": "message"} `}>{counterState.error || counterState.message}</div>
                 </div>
-                : <div className={`counter-display ${checkingIncorrectValuesInc 
-                        ? "red" 
-                        : ""}`}
+                : <div className={`counter-display ${checkingIncorrectValuesInc
+                    ? "red"
+                    : ""}`}
                 >{counterState.countUser}</div>
             }
 
@@ -46,18 +53,18 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
                 <Button title={"inc"}
                         onClick={onClickButtonIncHandler}
                         disabled={checkingIncorrectValuesInc}
+                    // disabled={counterState.incButtonDisabled}
 
                 />
                 <Button title={"reset"}
                         onClick={onClickButtonResetHandler}
                         disabled={checkingIncorrectValuesReset}
+                    // disabled={counterState.resetButtonDisabled}
                 />
             </div>
         </div>
     );
 };
-
-
 
 
 //GPT
