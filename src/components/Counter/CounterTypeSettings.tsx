@@ -70,7 +70,11 @@ export const CounterTypeSettings = ({
             ...counterState,
             countUser: startValue,
             maxValue: maxValue,
-            startValue: startValue
+            startValue: startValue,
+            setButtonDisabled: true, // Обновление состояния для управления активностью кнопки "set"
+            incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
+            resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
+            message: "" // Обновление сообщения после нажатия на кнопку "set"
         });
     }
 
@@ -96,7 +100,7 @@ export const CounterTypeSettings = ({
             <div className="buttons">
                 <Button title={"set"}
                         onClick={onClickButtonSetHandler}
-                        disabled={settingsButtonDisabledAndIncorrectInput}
+                        disabled={counterState.setButtonDisabled || settingsButtonDisabledAndIncorrectInput}
                 />
             </div>
         </div>
