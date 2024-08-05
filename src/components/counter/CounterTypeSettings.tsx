@@ -28,9 +28,7 @@ export const CounterTypeSettings = ({
     const [startValue, setStartValue] = useState<number>(counterState.startValue);
 
     const settingsButtonDisabledAndIncorrectInput =
-        startValue < 0
-        || startValue >= maxValue
-    // || startValue > maxValue
+        startValue < 0 || startValue >= maxValue
 
     // const checkingIncorrectValuesInput = () => {
     //     if (startValue < 0 || startValue >= maxValue) {
@@ -48,6 +46,7 @@ export const CounterTypeSettings = ({
     //     }
     // };
 
+    // // Проверка на корректный ввод значения в input
     const checkingIncorrectValuesInput = () => {
         if (startValue < 0 || startValue >= maxValue) {
             setCounterState({
@@ -66,6 +65,7 @@ export const CounterTypeSettings = ({
         }
     }
 
+    // Проверяем, если меняется maxValue или startValue, каждый раз useEffect запускает функцию checkingIncorrectValuesInput()
     useEffect(() => {
         checkingIncorrectValuesInput()
     }, [maxValue, startValue])
@@ -100,6 +100,7 @@ export const CounterTypeSettings = ({
     //     }));
     // };
 
+    // При изменении max value в инпуте
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         const newMaxValue = Number(e.currentTarget.value);
         setMaxValue(newMaxValue);
@@ -113,6 +114,7 @@ export const CounterTypeSettings = ({
         });
     }
 
+    // При изменении start value в инпуте
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const newStartValue = Number(e.currentTarget.value);
         setStartValue(newStartValue);
@@ -126,6 +128,7 @@ export const CounterTypeSettings = ({
         });
     }
 
+    // При клике на кнопку set что у нас происходит
     const onClickButtonSetHandler = () => {
         // debugger
         setCounterState({
@@ -139,8 +142,7 @@ export const CounterTypeSettings = ({
             resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
         });
     }
-
-
+    
     return (
         <div>
             <div className={"counter-display settings"}>

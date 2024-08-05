@@ -25,11 +25,13 @@ const App = () => {
     let displayId1 = v1()
     let displayId2 = v1()
 
+    // Глобальный стейт наших дисплеев-счётчиков
     const [displays, setDisplays] = useState<DisplaysType[]>([
         {id: displayId1, title: "counter display with settings", type: 'settings'},
         {id: displayId2, title: "User's display counter", type: 'user'},
     ])
 
+    // Глобальный стейт с исходными данными счётчиков
     const [counterState, setCounterState] = useState<CounterStateType>({
             countUser: 0,
             maxValue: 5,
@@ -56,7 +58,7 @@ const App = () => {
                 // ... (другие свойства counterState)
             });
         }
-    }, []); // Выполняется только при монтировании
+    }, []); // Выполняется только при монтировании-первой загрузке
 
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify({

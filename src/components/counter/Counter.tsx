@@ -26,19 +26,10 @@ export const Counter = ({title, type, counterState, setCounterState}: CounterTyp
     //     }
     // )
 
-    // const maxValue = 5;
-
     return (
         <div className="counter">
             <h3 className="title">{title}</h3>
             <div>
-
-                {/*<CounterTypeSettings*/}
-                {/*    counterState={counterState}*/}
-                {/*    setCounterState={setCounterState}*/}
-                {/*/>*/}
-                {/*<CounterTypeUser counterState={counterState} setCounterState={setCounterState}/>*/}
-
                 {
                     type === "settings" && (
                         <CounterTypeSettings counterState={counterState} setCounterState={setCounterState}/>
@@ -46,7 +37,7 @@ export const Counter = ({title, type, counterState, setCounterState}: CounterTyp
                 }
                 {
                     type === "user" && (
-                        <CounterTypeUser counterState={counterState} setCounterState={setCounterState} />
+                        <CounterTypeUser counterState={counterState} setCounterState={setCounterState}/>
 
                         // <CounterTypeUser counterState={counterState} setCounterState={setCounterState} error={counterState.error} />
                     )
