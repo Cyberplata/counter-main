@@ -45,6 +45,7 @@ const App = () => {
     )
 
     //var3
+    // Выполняется только при монтировании-первой загрузке
     useEffect(() => {
         // Загрузка из localStorage
         const storedState = localStorage.getItem('counterValue');
@@ -58,8 +59,9 @@ const App = () => {
                 // ... (другие свойства counterState)
             });
         }
-    }, []); // Выполняется только при монтировании-первой загрузке
+    }, []);
 
+    // Выполняется каждый раз при изменении counterState
     useEffect(() => {
         localStorage.setItem('counterValue', JSON.stringify({
             countUser: counterState.countUser,

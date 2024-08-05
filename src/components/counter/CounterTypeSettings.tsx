@@ -6,6 +6,10 @@ import {Label} from "../Label";
 
 type CounterTypeSettingsType = {
     counterState: CounterStateType
+    // setCounterState: any
+    setCounterState: (prevState: CounterStateType) => CounterStateType; // Изменено
+    // setCounterState: (prevState: CounterStateType) => void
+
     // setCounterState: (counterState: (prevState: CounterStateType) => {
     //     maxValue: number;
     //     setButtonDisabled: boolean;
@@ -16,7 +20,6 @@ type CounterTypeSettingsType = {
     //     message: string;
     //     incButtonDisabled: boolean
     // }) => void
-    setCounterState: (counterState: CounterStateType) => void
 }
 
 export const CounterTypeSettings = ({
@@ -30,119 +33,124 @@ export const CounterTypeSettings = ({
     const settingsButtonDisabledAndIncorrectInput =
         startValue < 0 || startValue >= maxValue
 
+    // // Проверка на корректный ввод значения в input
     // const checkingIncorrectValuesInput = () => {
     //     if (startValue < 0 || startValue >= maxValue) {
-    //         setCounterState((prevState: CounterStateType) => {
-    //             return ({
-    //                 ...prevState,
-    //                 error: "Incorrect start value!"
-    //             });
-    //         });
-    //     } else {
-    //         setCounterState((prevState: CounterStateType) => ({
-    //             ...prevState,
-    //             error: ""
-    //         }));
+    //         setCounterState({
+    //             ...counterState, error: "Incorrect value!"
+    //         })
     //     }
-    // };
+    //         // if (counterState.error !== "Incorrect value!" && !!counterState.countUser) {
+    //         //     setCounterState({
+    //         //         ...counterState, error: "enter values and press 'set'"
+    //         //     })
+    //     // }
+    //     else {
+    //         setCounterState({
+    //             ...counterState, error: ""
+    //         })
+    //     }
+    // }
 
-    // // Проверка на корректный ввод значения в input
+    // prevState
     const checkingIncorrectValuesInput = () => {
         if (startValue < 0 || startValue >= maxValue) {
-            setCounterState({
-                ...counterState, error: "Incorrect value!"
-            })
+            setCounterState((prevState: CounterStateType) => ({
+                    ...prevState,
+                    error: "Incorrect start value!"
+            }));
+        } else {
+            setCounterState((prevState: CounterStateType) => ({
+                ...prevState,
+                error: ""
+            }));
         }
-            // if (counterState.error !== "Incorrect value!" && !!counterState.countUser) {
-            //     setCounterState({
-            //         ...counterState, error: "enter values and press 'set'"
-            //     })
-        // }
-        else {
-            setCounterState({
-                ...counterState, error: ""
-            })
-        }
-    }
+    };
 
     // Проверяем, если меняется maxValue или startValue, каждый раз useEffect запускает функцию checkingIncorrectValuesInput()
     useEffect(() => {
         checkingIncorrectValuesInput()
     }, [maxValue, startValue])
 
+    // useEffect с зависимостью [counterState.maxValue, counterState.startValue]
+    // useEffect(() => {
+    //     checkingIncorrectValuesInput()
+    // }, [counterState.maxValue, counterState.startValue])
+
+    // // При изменении max value в инпуте
     // const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
     //     const newMaxValue = Number(e.currentTarget.value);
     //     setMaxValue(newMaxValue);
-    //     setCounterState((prevState: CounterStateType) => {
-    //         return ({
-    //             ...prevState,
-    //             maxValue: newMaxValue
-    //         });
+    //     setCounterState({
+    //         ...counterState,
+    //         maxValue: newMaxValue,
+    //         setButtonDisabled: false,
+    //         message: "enter values and press 'set'",
+    //         incButtonDisabled: true,
+    //         resetButtonDisabled: true
     //     });
     // }
     //
+    // // При изменении start value в инпуте
     // const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
     //     const newStartValue = Number(e.currentTarget.value);
     //     setStartValue(newStartValue);
-    //     setCounterState((prevState: CounterStateType) => ({
-    //         ...prevState,
-    //         startValue: newStartValue
-    //     }));
-    // };
+    //     setCounterState({
+    //         ...counterState,
+    //         startValue: newStartValue,
+    //         setButtonDisabled: false,
+    //         message: "enter values and press 'set'",
+    //         incButtonDisabled: true,
+    //         resetButtonDisabled: true
+    //     });
+    // }
     //
+    // // При клике на кнопку set что у нас происходит
     // const onClickButtonSetHandler = () => {
-    //     setCounterState((prevState: CounterStateType) => ({
-    //         ...prevState,
+    //     // debugger
+    //     setCounterState({
+    //         ...counterState,
     //         countUser: startValue,
     //         maxValue: maxValue,
     //         startValue: startValue,
-    //         error: ""
-    //     }));
-    // };
+    //         message: "", // Обновление сообщения после нажатия на кнопку "set"
+    //         setButtonDisabled: true, // Обновление состояния для управления активностью кнопки "set"
+    //         incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
+    //         resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
+    //     });
+    // }
 
-    // При изменении max value в инпуте
+    // prevState
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         const newMaxValue = Number(e.currentTarget.value);
         setMaxValue(newMaxValue);
-        setCounterState({
-            ...counterState,
-            maxValue: newMaxValue,
-            setButtonDisabled: false,
-            message: "enter values and press 'set'",
-            incButtonDisabled: true,
-            resetButtonDisabled: true
+        setCounterState((prevState: CounterStateType) => {
+            return ({
+                ...prevState,
+                maxValue: newMaxValue
+            });
         });
     }
 
-    // При изменении start value в инпуте
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const newStartValue = Number(e.currentTarget.value);
         setStartValue(newStartValue);
-        setCounterState({
-            ...counterState,
-            startValue: newStartValue,
-            setButtonDisabled: false,
-            message: "enter values and press 'set'",
-            incButtonDisabled: true,
-            resetButtonDisabled: true
-        });
-    }
+        setCounterState((prevState: CounterStateType) => ({
+            ...prevState,
+            startValue: newStartValue
+        }));
+    };
 
-    // При клике на кнопку set что у нас происходит
     const onClickButtonSetHandler = () => {
-        // debugger
-        setCounterState({
-            ...counterState,
+        setCounterState((prevState: CounterStateType) => ({
+            ...prevState,
             countUser: startValue,
             maxValue: maxValue,
             startValue: startValue,
-            message: "", // Обновление сообщения после нажатия на кнопку "set"
-            setButtonDisabled: true, // Обновление состояния для управления активностью кнопки "set"
-            incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
-            resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
-        });
-    }
-    
+            error: ""
+        }));
+    };
+
     return (
         <div>
             <div className={"counter-display settings"}>
