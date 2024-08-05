@@ -41,7 +41,10 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
         <div>
             {counterState.error || counterState.message
                 ? <div className={"counter-display"}>
-                    <div className={`"error" ${counterState.error ? "error": "message"} `}>{counterState.error || counterState.message}</div>
+                    <div className={`"error" ${counterState.error 
+                        ? "error" 
+                        : "message"}`}
+                    >{counterState.error || counterState.message}</div>
                 </div>
                 : <div className={`counter-display ${checkingIncorrectValuesInc
                     ? "red"
@@ -125,7 +128,7 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
 
 // import React from 'react';
 // import {Button} from "../Button";
-// import {CounterStateType} from "./Counter";
+// import {CounterStateType} from "./counter";
 //
 // type CounterTypeUserType = {
 //     counterState: CounterStateType
@@ -179,7 +182,7 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
 
 // import React from 'react';
 // import {Button} from "../Button";
-// import {CounterStateType} from "./Counter";
+// import {CounterStateType} from "./counter";
 //
 // type CounterTypeUserType = {
 //     counterState: CounterStateType

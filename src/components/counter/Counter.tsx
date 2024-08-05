@@ -32,6 +32,7 @@ export const Counter = ({title, type, counterState, setCounterState}: CounterTyp
         <div className="counter">
             <h3 className="title">{title}</h3>
             <div>
+
                 {/*<CounterTypeSettings*/}
                 {/*    counterState={counterState}*/}
                 {/*    setCounterState={setCounterState}*/}

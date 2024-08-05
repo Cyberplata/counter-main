@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Counter} from "./components/Counter/Counter";
+import {Counter} from "./components/counter/Counter";
 import {v1} from "uuid";
 
 export type DisplaysType = {
@@ -26,7 +26,7 @@ const App = () => {
     let displayId2 = v1()
 
     const [displays, setDisplays] = useState<DisplaysType[]>([
-        {id: displayId1, title: "Counter display with settings", type: 'settings'},
+        {id: displayId1, title: "counter display with settings", type: 'settings'},
         {id: displayId2, title: "User's display counter", type: 'user'},
     ])
 
@@ -42,6 +42,87 @@ const App = () => {
         }
     )
 
+    //var3
+    useEffect(() => {
+        // Загрузка из localStorage
+        const storedState = localStorage.getItem('counterValue');
+        if (storedState) {
+            const newValue = JSON.parse(storedState);
+            setCounterState({
+                ...counterState,
+                countUser: newValue.countUser,
+                maxValue: newValue.maxValue,
+                startValue: newValue.startValue,
+                // ... (другие свойства counterState)
+            });
+        }
+    }, []); // Выполняется только при монтировании
+
+    useEffect(() => {
+        localStorage.setItem('counterValue', JSON.stringify({
+            countUser: counterState.countUser,
+            maxValue: counterState.maxValue,
+            startValue: counterState.startValue,
+            // ... (другие свойства counterState)
+        }));
+    }, [counterState]);
+
+    //GPT4-Midjourney-var1
+    // useEffect(() => {
+    //     // Загрузка из localStorage
+    //     const storedState = localStorage.getItem('counterValue');
+    //     if (storedState) {
+    //         setCounterState(JSON.parse(storedState));
+    //     }
+    // }, []); // Выполняется только при монтировании
+    //
+    // useEffect(() => {
+    //     // Сохранение в localStorage
+    //     localStorage.setItem('counterValue', JSON.stringify(counterState));
+    // }, [counterState]); // Выполняется при каждом изменении counterState
+
+    //GPT4-Midjourney-var2
+    // useEffect(() => {
+    //     // Загрузка из localStorage
+    //     let valueAsString = localStorage.getItem('counterValue');
+    //     if (valueAsString) {
+    //         let newValue = JSON.parse(valueAsString);
+    //         setCounterState(newValue);
+    //     } else {
+    //         // Инициализация, если нет данных в localStorage
+    //         setCounterState({
+    //             countUser: 0,
+    //             maxValue: 5,
+    //             startValue: 0,
+    //             error: "",
+    //             message: "",
+    //             setButtonDisabled: false,
+    //             incButtonDisabled: false,
+    //             resetButtonDisabled: false
+    //         });
+    //     }
+    //
+    //     // Сохранение в localStorage при каждом изменении counterState
+    //     return () => {
+    //         localStorage.setItem('counterValue', JSON.stringify(counterState));
+    //         // localStorage.clear()
+    //     };
+    // }, [counterState]);
+
+    //MY
+    // useEffect( () => { // Отработает единожды
+    //     let valueAsString = localStorage.getItem('counterValue')
+    //     if (valueAsString) {
+    //         let newValue = JSON.parse(valueAsString)
+    //         setCounterState(newValue)
+    //     }
+    // }, [] )
+    //
+    // useEffect(() => {
+    //     localStorage.setItem('counterValue', JSON.stringify(counterState))
+    //     // localStorage.clear()
+    // }, [counterState]);
+
     return (
         <div className={"App"}>
             {displays.map(el => {
@@ -53,12 +134,6 @@ const App = () => {
                                 setCounterState={setCounterState}
                 />
             })}
-
-            {/*<CounterTypeSettings*/}
-            {/*    counterState={counterState}*/}
-            {/*    setCounterState={setCounterState}*/}
-            {/*/>*/}
-            {/*<CounterTypeUser counterState={counterState} setCounterState={setCounterState}/>*/}
         </div>
     );
 };

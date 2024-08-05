@@ -1,9 +1,21 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import {Button} from "../Button";
 import {CounterStateType} from "../../App";
+import {Input} from "../Input";
+import {Label} from "../Label";
 
 type CounterTypeSettingsType = {
     counterState: CounterStateType
+    // setCounterState: (counterState: (prevState: CounterStateType) => {
+    //     maxValue: number;
+    //     setButtonDisabled: boolean;
+    //     countUser: number;
+    //     resetButtonDisabled: boolean;
+    //     startValue: number;
+    //     error: string;
+    //     message: string;
+    //     incButtonDisabled: boolean
+    // }) => void
     setCounterState: (counterState: CounterStateType) => void
 }
 
@@ -19,6 +31,22 @@ export const CounterTypeSettings = ({
         startValue < 0
         || startValue >= maxValue
     // || startValue > maxValue
+
+    // const checkingIncorrectValuesInput = () => {
+    //     if (startValue < 0 || startValue >= maxValue) {
+    //         setCounterState((prevState: CounterStateType) => {
+    //             return ({
+    //                 ...prevState,
+    //                 error: "Incorrect start value!"
+    //             });
+    //         });
+    //     } else {
+    //         setCounterState((prevState: CounterStateType) => ({
+    //             ...prevState,
+    //             error: ""
+    //         }));
+    //     }
+    // };
 
     const checkingIncorrectValuesInput = () => {
         if (startValue < 0 || startValue >= maxValue) {
@@ -42,9 +70,35 @@ export const CounterTypeSettings = ({
         checkingIncorrectValuesInput()
     }, [maxValue, startValue])
 
-    // useEffect(() => {
+    // const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
+    //     const newMaxValue = Number(e.currentTarget.value);
+    //     setMaxValue(newMaxValue);
+    //     setCounterState((prevState: CounterStateType) => {
+    //         return ({
+    //             ...prevState,
+    //             maxValue: newMaxValue
+    //         });
+    //     });
+    // }
     //
-    // },[])
+    // const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+    //     const newStartValue = Number(e.currentTarget.value);
+    //     setStartValue(newStartValue);
+    //     setCounterState((prevState: CounterStateType) => ({
+    //         ...prevState,
+    //         startValue: newStartValue
+    //     }));
+    // };
+    //
+    // const onClickButtonSetHandler = () => {
+    //     setCounterState((prevState: CounterStateType) => ({
+    //         ...prevState,
+    //         countUser: startValue,
+    //         maxValue: maxValue,
+    //         startValue: startValue,
+    //         error: ""
+    //     }));
+    // };
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
         const newMaxValue = Number(e.currentTarget.value);
@@ -90,20 +144,20 @@ export const CounterTypeSettings = ({
     return (
         <div>
             <div className={"counter-display settings"}>
-                <label>max value:
-                    <input className={`inputSettings ${startValue >= maxValue ? "red" : ""}`}
+                <Label htmlFor={"maxValueInput"}>max value:
+                    <Input id={"maxValueInput"} className={`inputSettings ${startValue >= maxValue ? "red" : ""}`}
                            type="number"
                            value={maxValue}
                            onChange={onChangeMaxValue}
                     />
-                </label>
-                <label>start value:
-                    <input className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
+                </Label>
+                <Label htmlFor={"startValueInput"}>start value:
+                    <Input id={"startValueInput"} className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
                            type="number"
                            value={startValue}
                            onChange={onChangeStartValue}
                     />
-                </label>
+                </Label>
             </div>
             <div className="buttons">
                 <Button title={"set"}
@@ -213,7 +267,7 @@ export const CounterTypeSettings = ({
 /*
 import React, {ChangeEvent} from 'react';
 import {Button} from "../Button";
-import {CounterStateType} from "./Counter";
+import {CounterStateType} from "./counter";
 
 type CounterTypeSettingsType = {
     counterState: CounterStateType
@@ -295,7 +349,7 @@ export const CounterTypeSettings = ({
 
 // import React, {ChangeEvent} from 'react';
 // import {Button} from "../Button";
-// import {CounterStateType} from "./Counter";
+// import {CounterStateType} from "./counter";
 //
 // type CounterTypeSettingsType = {
 //     counterState: CounterStateType
