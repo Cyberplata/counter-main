@@ -26,10 +26,10 @@ const App = () => {
     let displayId2 = v1()
 
     // Глобальный стейт наших дисплеев-счётчиков
-    const [displays, setDisplays] = useState<DisplaysType[]>([
+    const displays: DisplaysType[] = [
         {id: displayId1, title: "counter display with settings", type: 'settings'},
         {id: displayId2, title: "User's display counter", type: 'user'},
-    ])
+    ]
 
     // Глобальный стейт с исходными данными счётчиков
     const [counterState, setCounterState] = useState<CounterStateType>({
@@ -51,13 +51,16 @@ const App = () => {
         const storedState = localStorage.getItem('counterValue');
         if (storedState) {
             const newValue = JSON.parse(storedState);
-            setCounterState({
-                ...counterState,
-                countUser: newValue.countUser,
-                maxValue: newValue.maxValue,
-                startValue: newValue.startValue,
-                // ... (другие свойства counterState)
-            });
+            console.log(newValue)
+            setCounterState((prev) => {
+                console.log(prev)
+                return ({
+                    ...prev,
+                    countUser: newValue.countUser,
+                    maxValue: newValue.maxValue,
+                    startValue: newValue.startValue,
+                })
+            })
         }
     }, []);
 
@@ -67,7 +70,6 @@ const App = () => {
             countUser: counterState.countUser,
             maxValue: counterState.maxValue,
             startValue: counterState.startValue,
-            // ... (другие свойства counterState)
         }));
     }, [counterState]);
 
