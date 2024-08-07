@@ -1,7 +1,7 @@
-import React from 'react';
+import {ReactNode} from 'react';
 
 export type LabelType = {
-    children: React.ReactNode
+    children: ReactNode
     className?: string;
     htmlFor?: string;
 }

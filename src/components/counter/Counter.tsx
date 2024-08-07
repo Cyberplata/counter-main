@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Dispatch, SetStateAction} from 'react';
 import {CounterTypeSettings} from "./CounterTypeSettings";
 import {CounterTypeUser} from "./CounterTypeUser";
 import {CounterStateType} from "../../App";
@@ -9,7 +9,7 @@ type CounterType = {
     title: string
     type: 'settings' | 'user'
     counterState: CounterStateType
-    setCounterState: (counterState: CounterStateType) => void
+    setCounterState: Dispatch<SetStateAction<CounterStateType>>
 }
 
 // export type CounterStateType = {

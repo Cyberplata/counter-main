@@ -52,16 +52,13 @@ const App = () => {
         if (storedState) {
             const newValue = JSON.parse(storedState);
             console.log(newValue)
-            setCounterState((prev) => {
-                console.log(prev)
-                return ({
-                    ...prev,
+            setCounterState({
+                ...counterState,
                     countUser: newValue.countUser,
                     maxValue: newValue.maxValue,
                     startValue: newValue.startValue,
                 })
-            })
-        }
+            }
     }, []);
 
     // Выполняется каждый раз при изменении counterState

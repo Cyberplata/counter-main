@@ -30,6 +30,7 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
             });
         }
     }
+    const error = (counterState.startValue < 0 || counterState.startValue >= counterState.maxValue) && 'incorrect Value'
 
     const onClickButtonResetHandler = () => {
         setCounterState({
@@ -41,12 +42,12 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
 
     return (
         <div>
-            {counterState.error || counterState.message
+            {error || counterState.message
                 ? <div className={"counter-display"}>
-                    <div className={`"error" ${counterState.error 
+                    <div className={`"error" ${error 
                         ? "error" 
                         : "message"}`}
-                    >{counterState.error || counterState.message}</div>
+                    >{error || counterState.message}</div>
                 </div>
                 : <div className={`counter-display ${checkingIncorrectValuesInc
                     ? "red"

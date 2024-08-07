@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from 'react';
+import {ChangeEvent, Dispatch, SetStateAction,  useState} from 'react';
 import {Button} from "../Button";
 import {CounterStateType} from "../../App";
 import {Input} from "../Input";
@@ -6,7 +6,7 @@ import {Label} from "../Label";
 
 type CounterTypeSettingsType = {
     counterState: CounterStateType
-    setCounterState: any
+    setCounterState: Dispatch<SetStateAction<CounterStateType>>
     // setCounterState: (prevState: CounterStateType) => CounterStateType;
     // setCounterState: (counterState: CounterStateType) => void
 
@@ -27,8 +27,8 @@ export const CounterTypeSettings = ({
                                         setCounterState
                                     }: CounterTypeSettingsType) => {
 
-    const [maxValue, setMaxValue] = useState<number>(counterState.maxValue);
-    const [startValue, setStartValue] = useState<number>(counterState.startValue);
+    const [maxValue, setMaxValue] = useState(counterState.maxValue);
+    const [startValue, setStartValue] = useState(counterState.startValue);
 
     const settingsButtonDisabledAndIncorrectInput =
         startValue < 0 || startValue >= maxValue
@@ -52,26 +52,11 @@ export const CounterTypeSettings = ({
     //     }
     // }
 
-    const checkingIncorrectValuesInput = useCallback(() => {
-        if (startValue < 0 || startValue >= maxValue) {
-            setCounterState((prevState: CounterStateType) => ({
-                ...prevState,
-                error: "Incorrect value!"
-            }));
-        } else {
-            setCounterState((prevState: CounterStateType) => ({
-                ...prevState,
-                error: ""
-            }));
-        }
-    }, [startValue, maxValue, setCounterState]);
-
-    // prevState
-    // const checkingIncorrectValuesInput = () => {
+    // const checkingIncorrectValuesInput = useCallback(() => {
     //     if (startValue < 0 || startValue >= maxValue) {
     //         setCounterState((prevState: CounterStateType) => ({
-    //                 ...prevState,
-    //                 error: "Incorrect start value!"
+    //             ...prevState,
+    //             error: "Incorrect value!"
     //         }));
     //     } else {
     //         setCounterState((prevState: CounterStateType) => ({
@@ -79,11 +64,26 @@ export const CounterTypeSettings = ({
     //             error: ""
     //         }));
     //     }
-    // };
-
-    useEffect(() => {
-        // checkingIncorrectValuesInput();
-    }, [maxValue, startValue, checkingIncorrectValuesInput]);
+    // }, [startValue, maxValue, setCounterState]);
+    //
+    // // prevState
+    // // const checkingIncorrectValuesInput = () => {
+    // //     if (startValue < 0 || startValue >= maxValue) {
+    // //         setCounterState((prevState: CounterStateType) => ({
+    // //                 ...prevState,
+    // //                 error: "Incorrect start value!"
+    // //         }));
+    // //     } else {
+    // //         setCounterState((prevState: CounterStateType) => ({
+    // //             ...prevState,
+    // //             error: ""
+    // //         }));
+    // //     }
+    // // };
+    //
+    // useEffect(() => {
+    //    // checkingIncorrectValuesInput();
+    // }, [maxValue, startValue, checkingIncorrectValuesInput]);
 
     // Проверяем, если меняется maxValue или startValue, каждый раз useEffect запускает функцию checkingIncorrectValuesInput()
     // useEffect(() => {
@@ -113,14 +113,16 @@ export const CounterTypeSettings = ({
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const newStartValue = Number(e.currentTarget.value);
         setStartValue(newStartValue);
-        setCounterState({
-            ...counterState,
+        setCounterState((prev)=>{
+
+            return{
+            ...prev,
             startValue: newStartValue,
             setButtonDisabled: false,
             message: "enter values and press 'set'",
             incButtonDisabled: true,
             resetButtonDisabled: true
-        });
+        }});
     }
 
     // При клике на кнопку set что у нас происходит
