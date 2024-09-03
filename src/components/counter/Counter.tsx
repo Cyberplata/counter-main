@@ -12,19 +12,13 @@ type CounterType = {
     setCounterState: Dispatch<SetStateAction<CounterStateType>>
 }
 
-// export type CounterStateType = {
-//     countUser: number
-//     maxValue: number
-//     startValue: number
-// }
-
-export const Counter = ({title, type, counterState, setCounterState}: CounterType) => {
-    // const [counterState, setCounterState] = useState<CounterStateType>({
-    //         countUser: 0,
-    //         maxValue: 5,
-    //         startValue: 0,
-    //     }
-    // )
+export const Counter = (props: CounterType) => {
+    const {
+        title,
+        type,
+        counterState,
+        setCounterState
+    } = props
 
     return (
         <div className="counter">
@@ -38,8 +32,6 @@ export const Counter = ({title, type, counterState, setCounterState}: CounterTyp
                 {
                     type === "user" && (
                         <CounterTypeUser counterState={counterState} setCounterState={setCounterState}/>
-
-                        // <CounterTypeUser counterState={counterState} setCounterState={setCounterState} error={counterState.error} />
                     )
                 }
             </div>
