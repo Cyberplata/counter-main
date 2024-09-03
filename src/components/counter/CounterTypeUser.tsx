@@ -1,14 +1,16 @@
 import React from 'react';
 import {Button} from "../Button";
 import {CounterStateType} from "../../App";
+import {CounterStateActionsType} from "../../model/counterState-reducer";
 
 type CounterTypeUserType = {
     counterState: CounterStateType
-    setCounterState: (counterState: CounterStateType) => void
+    dispatchToCounterState: React.Dispatch<CounterStateActionsType>
+    // setCounterState: (counterState: CounterStateType) => void
     // error: string
 }
 
-export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUserType) => {
+export const CounterTypeUser = ({counterState, dispatchToCounterState}: CounterTypeUserType) => {
     // Проверка на выполнения условий при увеличении - клике на кнопку inc
     const checkingIncorrectValuesInc =
         counterState.startValue < 0 ||
@@ -24,7 +26,7 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
 
     const onClickButtonIncHandler = () => {
         if (counterState.countUser < counterState.maxValue) {
-            setCounterState({
+            dispatchToCounterState({
                 ...counterState,
                 countUser: counterState.countUser + 1
             });
@@ -33,7 +35,7 @@ export const CounterTypeUser = ({counterState, setCounterState}: CounterTypeUser
     const error = (counterState.startValue < 0 || counterState.startValue >= counterState.maxValue) && 'incorrect Value'
 
     const onClickButtonResetHandler = () => {
-        setCounterState({
+        dispatchToCounterState({
             ...counterState,
             countUser: 0,
             setButtonDisabled: false

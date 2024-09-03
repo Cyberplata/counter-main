@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import './App.css';
 import {Counter} from "./components/counter/Counter";
 import {v1} from "uuid";
+import {counterStateReducer, setCounterStateAC} from "./model/counterState-reducer";
 
 export type DisplaysType = {
     id: string
@@ -20,7 +21,7 @@ export type CounterStateType = {
     resetButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "reset"
 }
 
-const App = () => {
+const AppWithReducer = () => {
 
     let displayId1 = v1()
     let displayId2 = v1()
@@ -32,7 +33,7 @@ const App = () => {
     ]
 
     // Глобальный стейт с исходными данными счётчиков
-    const [counterState, setCounterState] = useState<CounterStateType>({
+    const [counterState, dispatchToCounterState] = useReducer(counterStateReducer,{
             countUser: 0,
             maxValue: 5,
             startValue: 0,
@@ -44,30 +45,47 @@ const App = () => {
         }
     )
 
-    // Выполняется только при монтировании-первой загрузке
-    useEffect(() => {
-        // Загрузка из localStorage
-        const storedState = localStorage.getItem('counterValue');
-        if (storedState) {
-            const newValue = JSON.parse(storedState);
-            console.log(newValue)
-            setCounterState({
-                ...counterState,
-                    countUser: newValue.countUser,
-                    maxValue: newValue.maxValue,
-                    startValue: newValue.startValue,
-                })
-            }
-    }, []);
+    // // Выполняется только при монтировании-первой загрузке
+    // useEffect(() => {
+    //     // Загрузка из localStorage
+    //     const storedState = localStorage.getItem('counterValue');
+    //     if (storedState) {
+    //         const newValue = JSON.parse(storedState);
+    //         console.log(newValue)
+    //         dispatchToCounterState({
+    //             ...counterState,
+    //                 countUser: newValue.countUser,
+    //                 maxValue: newValue.maxValue,
+    //                 startValue: newValue.startValue,
+    //             })
+    //         }
+    // }, []);
+    //
+    // // Выполняется каждый раз при изменении counterState
+    // useEffect(() => {
+    //     localStorage.setItem('counterValue', JSON.stringify({
+    //         countUser: counterState.countUser,
+    //         maxValue: counterState.maxValue,
+    //         startValue: counterState.startValue,
+    //     }));
+    // }, [counterState]);
 
-    // Выполняется каждый раз при изменении counterState
-    useEffect(() => {
-        localStorage.setItem('counterValue', JSON.stringify({
-            countUser: counterState.countUser,
-            maxValue: counterState.maxValue,
-            startValue: counterState.startValue,
-        }));
-    }, [counterState]);
+    // //Mistral
+    // useEffect(() => {
+    //     const storedState = localStorage.getItem('counterValue');
+    //     if (storedState) {
+    //         const newValue = JSON.parse(storedState);
+    //         dispatchToCounterState(setCounterStateAC(newValue));
+    //     }
+    // }, []);
+    //
+    // useEffect(() => {
+    //     localStorage.setItem('counterValue', JSON.stringify({
+    //         countUser: counterState.countUser,
+    //         maxValue: counterState.maxValue,
+    //         startValue: counterState.startValue,
+    //     }));
+    // }, [counterState]);
 
     return (
         <div className={"App"}>
@@ -77,11 +95,11 @@ const App = () => {
                                 title={el.title}
                                 type={el.type}
                                 counterState={counterState}
-                                setCounterState={setCounterState}
+                                dispatchToCounterState={dispatchToCounterState}
                 />
             })}
         </div>
     );
 };
 
-export default App;
+export default AppWithReducer;
