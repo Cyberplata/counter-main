@@ -1,11 +1,16 @@
 import React from 'react';
 import {Button} from "../Button";
 import {CounterStateType} from "../../App";
-import {CounterStateActionsType} from "../../model/counterState-reducer";
+import {
+    CounterStateReducerActionsType,
+    setButtonDisabledAC,
+    setCountUserAC,
+    setIncButtonDisabledAC
+} from "../../model/counterState-reducer";
 
 type CounterTypeUserType = {
     counterState: CounterStateType
-    dispatchToCounterState: React.Dispatch<CounterStateActionsType>
+    dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
     // setCounterState: (counterState: CounterStateType) => void
     // error: string
 }
@@ -26,20 +31,23 @@ export const CounterTypeUser = ({counterState, dispatchToCounterState}: CounterT
 
     const onClickButtonIncHandler = () => {
         if (counterState.countUser < counterState.maxValue) {
-            dispatchToCounterState({
-                ...counterState,
-                countUser: counterState.countUser + 1
-            });
+            // dispatchToCounterState({
+            //             //     ...counterState,
+            //             //     countUser: counterState.countUser + 1
+            //             // });
+            dispatchToCounterState(setCountUserAC(counterState.countUser + 1))
         }
     }
     const error = (counterState.startValue < 0 || counterState.startValue >= counterState.maxValue) && 'incorrect Value'
 
     const onClickButtonResetHandler = () => {
-        dispatchToCounterState({
-            ...counterState,
-            countUser: 0,
-            setButtonDisabled: false
-        });
+        // dispatchToCounterState({
+        //     ...counterState,
+        //     countUser: 0,
+        //     setButtonDisabled: false
+        // });
+        dispatchToCounterState(setCountUserAC(0))
+        dispatchToCounterState(setButtonDisabledAC(false))
     }
 
     return (

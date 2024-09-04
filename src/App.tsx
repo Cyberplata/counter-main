@@ -77,7 +77,7 @@ const App = () => {
                                 title={el.title}
                                 type={el.type}
                                 counterState={counterState}
-                                dispatchToCounterState={setCounterState}
+                                setCounterState={setCounterState}
                 />
             })}
         </div>

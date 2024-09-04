@@ -1,10 +1,10 @@
 import React, {ChangeEvent, Dispatch, SetStateAction, useState} from 'react';
 import {Button} from "../Button";
-import {CounterStateType} from "../../App";
+import {CounterStateType} from "../../AppWithReducer";
 import {Input} from "../Input";
 import {Label} from "../Label";
 import {
-    CounterStateActionsType,
+    CounterStateReducerActionsType,
     setButtonDisabledAC, setCounterStateAC, setIncButtonDisabledAC,
     setMaxValueAC,
     setMessageAC, setResetButtonDisabledAC, setStartValueAC
@@ -12,14 +12,11 @@ import {
 
 type CounterTypeSettingsType = {
     counterState: CounterStateType
-    dispatchToCounterState: React.Dispatch<CounterStateActionsType>
+    dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
     // setCounterState: Dispatch<SetStateAction<CounterStateType>>
 }
 
-export const CounterTypeSettings = ({
-                                        counterState,
-                                        dispatchToCounterState
-                                    }: CounterTypeSettingsType) => {
+export const CounterTypeSettings = ({counterState, dispatchToCounterState}: CounterTypeSettingsType) => {
 
     const [maxValue, setMaxValue] = useState(counterState.maxValue);
     const [startValue, setStartValue] = useState(counterState.startValue);
@@ -91,6 +88,7 @@ export const CounterTypeSettings = ({
             countUser: startValue,
             maxValue: maxValue,
             startValue: startValue,
+            error: "",
             message: "",
             setButtonDisabled: true,
             incButtonDisabled: false,

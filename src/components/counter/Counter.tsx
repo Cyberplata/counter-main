@@ -1,8 +1,8 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {CounterTypeSettings} from "./CounterTypeSettings";
 import {CounterTypeUser} from "./CounterTypeUser";
-import {CounterStateType} from "../../App";
-import {CounterStateActionsType} from "../../model/counterState-reducer";
+import {CounterStateType} from "../../AppWithReducer";
+import {CounterStateReducerActionsType} from "../../model/counterState-reducer";
 
 
 type CounterType = {
@@ -10,7 +10,7 @@ type CounterType = {
     title: string
     type: 'settings' | 'user'
     counterState: CounterStateType
-    dispatchToCounterState: React.Dispatch<CounterStateActionsType>
+    dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
 }
 
 export const Counter = (props: CounterType) => {
