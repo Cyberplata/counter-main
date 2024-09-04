@@ -1,8 +1,8 @@
-import React, {useEffect, useReducer, useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 import {Counter} from "./components/counter/Counter";
 import {v1} from "uuid";
-import {counterStateReducer, setCounterStateAC} from "./model/counterState-reducer";
+import {counterStateReducer} from "./model/counterState-reducer";
 
 export type DisplaysType = {
     id: string

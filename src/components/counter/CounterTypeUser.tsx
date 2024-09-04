@@ -1,12 +1,7 @@
 import React from 'react';
 import {Button} from "../Button";
-import {CounterStateType} from "../../App";
-import {
-    CounterStateReducerActionsType,
-    setButtonDisabledAC,
-    setCountUserAC,
-    setIncButtonDisabledAC
-} from "../../model/counterState-reducer";
+import {CounterStateType} from "../../AppWithReducer";
+import {CounterStateReducerActionsType, setButtonDisabledAC, setCountUserAC} from "../../model/counterState-reducer";
 
 type CounterTypeUserType = {
     counterState: CounterStateType
