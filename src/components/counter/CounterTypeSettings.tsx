@@ -9,14 +9,17 @@ import {
     setMaxValueAC,
     setMessageAC, setResetButtonDisabledAC, setStartValueAC
 } from "../../model/counterState-reducer";
+import {UnknownAction} from "redux";
 
 type CounterTypeSettingsType = {
     counterState: CounterStateType
-    dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
+    dispatch: Dispatch<CounterStateReducerActionsType>
+    // dispatch: Dispatch<UnknownAction>
+    // dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
     // setCounterState: Dispatch<SetStateAction<CounterStateType>>
 }
 
-export const CounterTypeSettings = ({counterState, dispatchToCounterState}: CounterTypeSettingsType) => {
+export const CounterTypeSettings = ({counterState, dispatch}: CounterTypeSettingsType) => {
 
     const [maxValue, setMaxValue] = useState(counterState.maxValue);
     const [startValue, setStartValue] = useState(counterState.startValue);
@@ -39,11 +42,11 @@ export const CounterTypeSettings = ({counterState, dispatchToCounterState}: Coun
 
         const newMaxValue = Number(e.currentTarget.value);
         setMaxValue(newMaxValue);
-        dispatchToCounterState(setMaxValueAC(newMaxValue));
-        dispatchToCounterState(setButtonDisabledAC(false));
-        dispatchToCounterState(setMessageAC("enter values and press 'set'"));
-        dispatchToCounterState(setIncButtonDisabledAC(true));
-        dispatchToCounterState(setResetButtonDisabledAC(true));
+        dispatch(setMaxValueAC(newMaxValue));
+        dispatch(setButtonDisabledAC(false));
+        dispatch(setMessageAC("enter values and press 'set'"));
+        dispatch(setIncButtonDisabledAC(true));
+        dispatch(setResetButtonDisabledAC(true));
     }
 
     // При изменении start value в инпуте
@@ -63,11 +66,11 @@ export const CounterTypeSettings = ({counterState, dispatchToCounterState}: Coun
 
         const newStartValue = Number(e.currentTarget.value);
         setStartValue(newStartValue);
-        dispatchToCounterState(setStartValueAC(newStartValue));
-        dispatchToCounterState(setButtonDisabledAC(false));
-        dispatchToCounterState(setMessageAC("enter values and press 'set'"));
-        dispatchToCounterState(setIncButtonDisabledAC(true));
-        dispatchToCounterState(setResetButtonDisabledAC(true));
+        dispatch(setStartValueAC(newStartValue));
+        dispatch(setButtonDisabledAC(false));
+        dispatch(setMessageAC("enter values and press 'set'"));
+        dispatch(setIncButtonDisabledAC(true));
+        dispatch(setResetButtonDisabledAC(true));
     }
 
     // При клике на кнопку set что у нас происходит
@@ -84,7 +87,7 @@ export const CounterTypeSettings = ({counterState, dispatchToCounterState}: Coun
         //     resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
         // });
 
-        dispatchToCounterState(setCounterStateAC({
+        dispatch(setCounterStateAC({
             countUser: startValue,
             maxValue: maxValue,
             startValue: startValue,

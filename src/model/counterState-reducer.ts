@@ -1,6 +1,5 @@
 // counterState-reducer.ts
 import {CounterStateType} from "../AppWithReducer";
-import {v1} from "uuid";
 
 // Типы для action creators
 export type setCountUserActionType = ReturnType<typeof setCountUserAC>

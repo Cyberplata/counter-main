@@ -1,16 +1,19 @@
-import React from 'react';
+import React, {Dispatch} from 'react';
 import {Button} from "../Button";
 import {CounterStateType} from "../../AppWithReducer";
 import {CounterStateReducerActionsType, setButtonDisabledAC, setCountUserAC} from "../../model/counterState-reducer";
+import {UnknownAction} from "redux";
 
 type CounterTypeUserType = {
     counterState: CounterStateType
-    dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
+    dispatch: Dispatch<CounterStateReducerActionsType>
+    // dispatch: Dispatch<UnknownAction>
+    // dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
     // setCounterState: (counterState: CounterStateType) => void
     // error: string
 }
 
-export const CounterTypeUser = ({counterState, dispatchToCounterState}: CounterTypeUserType) => {
+export const CounterTypeUser = ({counterState, dispatch}: CounterTypeUserType) => {
     // Проверка на выполнения условий при увеличении - клике на кнопку inc
     const checkingIncorrectValuesInc =
         counterState.startValue < 0 ||
@@ -30,7 +33,7 @@ export const CounterTypeUser = ({counterState, dispatchToCounterState}: CounterT
             //             //     ...counterState,
             //             //     countUser: counterState.countUser + 1
             //             // });
-            dispatchToCounterState(setCountUserAC(counterState.countUser + 1))
+            dispatch(setCountUserAC(counterState.countUser + 1))
         }
     }
     const error = (counterState.startValue < 0 || counterState.startValue >= counterState.maxValue) && 'incorrect Value'
@@ -41,8 +44,8 @@ export const CounterTypeUser = ({counterState, dispatchToCounterState}: CounterT
         //     countUser: 0,
         //     setButtonDisabled: false
         // });
-        dispatchToCounterState(setCountUserAC(0))
-        dispatchToCounterState(setButtonDisabledAC(false))
+        dispatch(setCountUserAC(0))
+        dispatch(setButtonDisabledAC(false))
     }
 
     return (

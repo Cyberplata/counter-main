@@ -1,8 +1,10 @@
-import React, {useReducer} from 'react';
+import React, {useEffect, useReducer} from 'react';
 import './App.css';
 import {Counter} from "./components/counter/Counter";
 import {v1} from "uuid";
-import {counterStateReducer} from "./model/counterState-reducer";
+import {counterStateReducer, setCounterStateAC} from "./model/counterState-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "./app/store";
 
 export type DisplaysType = {
     id: string
@@ -32,18 +34,39 @@ const AppWithReducer = () => {
         {id: displayId2, title: "User's display counter", type: 'user'},
     ]
 
-    // Глобальный стейт с исходными данными счётчиков
-    const [counterState, dispatchToCounterState] = useReducer(counterStateReducer,{
-            countUser: 0,
-            maxValue: 5,
-            startValue: 0,
-            error: "",
-            message: "", // Инициализация поля для хранения сообщения
-            setButtonDisabled: false, // Инициализация поля для управления активностью кнопки "set"
-            incButtonDisabled: false, // Инициализация поля для управления активностью кнопки "inc"
-            resetButtonDisabled: false // Инициализация поля для управления активностью кнопки "reset"
+    const counterState = useSelector<RootState, CounterStateType>(state => state.counterState)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        const storedState = localStorage.getItem('counterValue');
+        if (storedState) {
+            const newValue = JSON.parse(storedState);
+            dispatch(setCounterStateAC(newValue));
         }
-    )
+    }, [dispatch]);
+
+    useEffect(() => {
+        localStorage.setItem('counterValue', JSON.stringify({
+            countUser: counterState.countUser,
+            maxValue: counterState.maxValue,
+            startValue: counterState.startValue,
+        }));
+    }, [counterState]);
+
+
+    // // Глобальный стейт с исходными данными счётчиков
+    // const [counterState, dispatchToCounterState] = useReducer(counterStateReducer,{
+    //         countUser: 0,
+    //         maxValue: 5,
+    //         startValue: 0,
+    //         error: "",
+    //         message: "", // Инициализация поля для хранения сообщения
+    //         setButtonDisabled: false, // Инициализация поля для управления активностью кнопки "set"
+    //         incButtonDisabled: false, // Инициализация поля для управления активностью кнопки "inc"
+    //         resetButtonDisabled: false // Инициализация поля для управления активностью кнопки "reset"
+    //     }
+    // )
 
     // // Выполняется только при монтировании-первой загрузке
     // useEffect(() => {
@@ -91,11 +114,11 @@ const AppWithReducer = () => {
         <div className={"App"}>
             {displays.map(el => {
                 return <Counter key={el.id}
-                                displayId={el.id}
+                                // displayId={el.id}
                                 title={el.title}
                                 type={el.type}
                                 counterState={counterState}
-                                dispatchToCounterState={dispatchToCounterState}
+                                dispatch={dispatch}
                 />
             })}
         </div>
