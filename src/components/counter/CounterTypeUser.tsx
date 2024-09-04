@@ -1,7 +1,12 @@
 import React, {Dispatch} from 'react';
 import {Button} from "../Button";
 import {CounterStateType} from "../../AppWithReducer";
-import {CounterStateReducerActionsType, setButtonDisabledAC, setCountUserAC} from "../../model/counterState-reducer";
+import {
+    CounterStateReducerActionsType,
+    resetCounterAC,
+    setButtonDisabledAC,
+    setCountUserAC
+} from "../../model/counterState-reducer";
 import {UnknownAction} from "redux";
 
 type CounterTypeUserType = {
@@ -44,8 +49,15 @@ export const CounterTypeUser = ({counterState, dispatch}: CounterTypeUserType) =
         //     countUser: 0,
         //     setButtonDisabled: false
         // });
-        dispatch(setCountUserAC(0))
-        dispatch(setButtonDisabledAC(false))
+
+        // dispatch(setCountUserAC(0))
+        // dispatch(setButtonDisabledAC(false))
+        dispatch(resetCounterAC({
+            countUser: 0,
+            setButtonDisabled: false
+        }))
+
+
     }
 
     return (

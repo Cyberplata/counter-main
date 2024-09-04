@@ -11,6 +11,8 @@ export type setButtonDisabledActionType = ReturnType<typeof setButtonDisabledAC>
 export type setIncButtonDisabledActionType = ReturnType<typeof setIncButtonDisabledAC>
 export type setResetButtonDisabledActionType = ReturnType<typeof setResetButtonDisabledAC>
 export type setCounterStateActionType = ReturnType<typeof setCounterStateAC>
+export type updateCounterSettingsActionType = ReturnType<typeof updateCounterSettingsAC>
+export type resetCounterActionType = ReturnType<typeof resetCounterAC>
 
 // Общий тип для всех действий
 export type CounterStateReducerActionsType =
@@ -23,6 +25,8 @@ export type CounterStateReducerActionsType =
     | setIncButtonDisabledActionType
     | setResetButtonDisabledActionType
     | setCounterStateActionType
+    | updateCounterSettingsActionType
+    | resetCounterActionType;
 
 const initialState: CounterStateType = {
     countUser: 0,
@@ -57,7 +61,37 @@ export const counterStateReducer = (
         case 'SET_RESET_BUTTON_DISABLED':
             return {...state, resetButtonDisabled: action.resetButtonDisabled};
         case 'SET_COUNTER_STATE':
-            return {...state, ...action.payload};
+            return {
+                ...state,
+                countUser: action.payload.countUser,
+                maxValue: action.payload.maxValue,
+                startValue: action.payload.startValue,
+                error: action.payload.error,
+                message: action.payload.message,
+                setButtonDisabled: action.payload.setButtonDisabled,
+                incButtonDisabled: action.payload.incButtonDisabled,
+                resetButtonDisabled: action.payload.resetButtonDisabled
+            };
+        case 'UPDATE_COUNTER_SETTINGS':
+            return {
+                ...state,
+                maxValue: action.payload.maxValue,
+                startValue: action.payload.startValue,
+                setButtonDisabled: action.payload.setButtonDisabled,
+                message: action.payload.message,
+                incButtonDisabled: action.payload.incButtonDisabled,
+                resetButtonDisabled: action.payload.resetButtonDisabled
+            };
+        case "RESET_COUNTER":
+            return {
+                ...state,
+                countUser: action.payload.countUser,
+                setButtonDisabled: action.payload.setButtonDisabled
+            }
+        // case 'SET_COUNTER_STATE':
+        //     return {...state, ...action.payload};
+        // case 'UPDATE_COUNTER_SETTINGS' :
+        //     return {...state, ...action.payload};
         default:
             return state;
     }
@@ -132,6 +166,30 @@ export const setCounterStateAC = (payload: {
 }) => {
     return {
         type: 'SET_COUNTER_STATE',
+        payload,
+    } as const;
+};
+
+export const updateCounterSettingsAC = (payload: {
+    maxValue: number,
+    startValue: number,
+    message: string,
+    setButtonDisabled: boolean,
+    incButtonDisabled: boolean,
+    resetButtonDisabled: boolean
+}) => {
+    return {
+        type: 'UPDATE_COUNTER_SETTINGS',
+        payload,
+    } as const
+}
+
+export const resetCounterAC = (payload: {
+    countUser: number,
+    setButtonDisabled: boolean
+}) => {
+    return {
+        type: 'RESET_COUNTER',
         payload,
     } as const;
 };

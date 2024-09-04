@@ -7,7 +7,7 @@ import {
     CounterStateReducerActionsType,
     setButtonDisabledAC, setCounterStateAC, setIncButtonDisabledAC,
     setMaxValueAC,
-    setMessageAC, setResetButtonDisabledAC, setStartValueAC
+    setMessageAC, setResetButtonDisabledAC, setStartValueAC, updateCounterSettingsAC
 } from "../../model/counterState-reducer";
 import {UnknownAction} from "redux";
 
@@ -42,11 +42,20 @@ export const CounterTypeSettings = ({counterState, dispatch}: CounterTypeSetting
 
         const newMaxValue = Number(e.currentTarget.value);
         setMaxValue(newMaxValue);
-        dispatch(setMaxValueAC(newMaxValue));
-        dispatch(setButtonDisabledAC(false));
-        dispatch(setMessageAC("enter values and press 'set'"));
-        dispatch(setIncButtonDisabledAC(true));
-        dispatch(setResetButtonDisabledAC(true));
+        dispatch(updateCounterSettingsAC({
+            maxValue: newMaxValue,
+            startValue,
+            setButtonDisabled: false,
+            message: "enter values and press 'set'",
+            incButtonDisabled: true,
+            resetButtonDisabled: true
+        }));
+
+        // dispatch(setMaxValueAC(newMaxValue));
+        // dispatch(setButtonDisabledAC(false));
+        // dispatch(setMessageAC("enter values and press 'set'"));
+        // dispatch(setIncButtonDisabledAC(true));
+        // dispatch(setResetButtonDisabledAC(true));
     }
 
     // При изменении start value в инпуте
@@ -66,11 +75,20 @@ export const CounterTypeSettings = ({counterState, dispatch}: CounterTypeSetting
 
         const newStartValue = Number(e.currentTarget.value);
         setStartValue(newStartValue);
-        dispatch(setStartValueAC(newStartValue));
-        dispatch(setButtonDisabledAC(false));
-        dispatch(setMessageAC("enter values and press 'set'"));
-        dispatch(setIncButtonDisabledAC(true));
-        dispatch(setResetButtonDisabledAC(true));
+        dispatch(updateCounterSettingsAC({
+            maxValue,
+            startValue: newStartValue,
+            setButtonDisabled: false,
+            message: "enter values and press 'set'",
+            incButtonDisabled: true,
+            resetButtonDisabled: true
+        }))
+
+        // dispatch(setStartValueAC(newStartValue));
+        // dispatch(setButtonDisabledAC(false));
+        // dispatch(setMessageAC("enter values and press 'set'"));
+        // dispatch(setIncButtonDisabledAC(true));
+        // dispatch(setResetButtonDisabledAC(true));
     }
 
     // При клике на кнопку set что у нас происходит
