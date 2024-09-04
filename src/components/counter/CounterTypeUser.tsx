@@ -56,6 +56,8 @@ export const CounterTypeUser = ({counterState, dispatch}: CounterTypeUserType) =
             countUser: 0,
             setButtonDisabled: false
         }))
+
+
     }
 
     return (
