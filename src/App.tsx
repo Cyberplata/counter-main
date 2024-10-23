@@ -1,6 +1,6 @@
 // import React, {useEffect, useState} from 'react';
 // import './App.css';
-// import {Counter} from "./components/counter/Counter";
+// import {Counter} from "./components/Counter/Counter";
 // import {v1} from "uuid";
 //
 // export type DisplaysType = {
@@ -26,9 +26,9 @@
 //     let displayId2 = v1()
 //
 //     // Глобальный стейт наших дисплеев-счётчиков
-//     const displays: DisplaysType[] = [
-//         {id: displayId1, title: "counter display with settings", type: 'settings'},
-//         {id: displayId2, title: "User's display counter", type: 'user'},
+//     const counter: DisplaysType[] = [
+//         {id: displayId1, title: "Counter display with settings", type: 'settings'},
+//         {id: displayId2, title: "User's display Counter", type: 'user'},
 //     ]
 //
 //     // Глобальный стейт с исходными данными счётчиков
@@ -71,7 +71,7 @@
 //
 //     return (
 //         <div className={"App"}>
-//             {displays.map(el => {
+//             {counter.map(el => {
 //                 return <Counter key={el.id}
 //                                 displayId={el.id}
 //                                 title={el.title}

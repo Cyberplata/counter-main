@@ -1,21 +1,17 @@
 import React from 'react';
-import {CounterTypeSettings} from "./CounterTypeSettings";
-import {CounterTypeUser} from "./CounterTypeUser";
+import {CounterTypeSettings} from "./CounterTypeSettings/CounterTypeSettings";
+import {CounterTypeUser} from "./CounterTypeUser/CounterTypeUser";
 
 
 type CounterType = {
     title: string
     type: 'settings' | 'user'
-    // counterState: CounterStateType
-    // dispatch: Dispatch<CounterStateReducerActionsType>
 }
 
 export const Counter = (props: CounterType) => {
     const {
         title,
         type,
-        // counterState,
-        // dispatch
     } = props
 
     return (

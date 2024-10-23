@@ -11,6 +11,6 @@ let displayId2 = v1()
 
 // Глобальный стейт наших дисплеев-счётчиков
 export const displays: DisplaysType[] = [
-    {id: displayId1, title: "counter display with settings", type: 'settings'},
-    {id: displayId2, title: "User's display counter", type: 'user'},
+    {id: displayId1, title: "Counter display with settings", type: 'settings'},
+    {id: displayId2, title: "User's display Counter", type: 'user'},
 ]

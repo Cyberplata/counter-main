@@ -1,5 +1,5 @@
 import {combineReducers, legacy_createStore} from "redux";
-import {counterStateReducer} from "../model/counterState-reducer";
+import {counterStateReducer} from "../features/counter/model/counterState-reducer";
 
 
 // объединяя reducer-ы с помощью combineReducers,

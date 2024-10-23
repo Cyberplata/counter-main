@@ -4,10 +4,10 @@ export type CounterStateType = {
     maxValue: number
     startValue: number
     error: string
-    message: string // Добавлено поле для хранения сообщения
-    setButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "set"
-    incButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "inc"
-    resetButtonDisabled: boolean // Добавлено поле для управления активностью кнопки "reset"
+    message: string // Поле для хранения сообщения
+    setButtonDisabled: boolean // Поле для управления активностью кнопки "set"
+    incButtonDisabled: boolean // Поле для управления активностью кнопки "inc"
+    resetButtonDisabled: boolean // Поле для управления активностью кнопки "reset"
 }
 
 const initialState: CounterStateType = {
