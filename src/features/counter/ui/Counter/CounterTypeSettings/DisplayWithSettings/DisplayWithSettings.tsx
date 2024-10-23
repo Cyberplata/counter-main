@@ -49,9 +49,7 @@ export const DisplayWithSettings = () => {
         <div className={"counter-display settings"}>
             <Label htmlFor={"maxValueInput"}>max value:
                 <Input id={"maxValueInput"}
-                       className={`inputSettings 
-                                ${startValue >= maxValue ? "red" : ""}
-                           `}
+                       className={`inputSettings ${startValue >= maxValue ? "red" : ""}`}
                        type="number"
                        value={maxValue}
                        onChange={onChangeMaxValueHandler}
@@ -59,9 +57,7 @@ export const DisplayWithSettings = () => {
             </Label>
             <Label htmlFor={"startValueInput"}>start value:
                 <Input id={"startValueInput"}
-                       className={`inputSettings
-                                ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}
-                           `}
+                       className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
                        type="number"
                        value={startValue}
                        onChange={onChangeStartValueHandler}

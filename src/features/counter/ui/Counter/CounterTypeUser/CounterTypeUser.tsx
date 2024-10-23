@@ -1,8 +1,8 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../../../../app/store";
-import {type CounterStateType, resetCounterAC, setCountUserAC} from "../../../model/counterState-reducer";
 import {Button} from "../../../../../common/components/Button/Button";
+import {type CounterStateType, resetCounterAC, setCountUserAC} from "../../../model/counterState-reducer";
 import {DisplayLogicMessageAndError} from "./DisplayLogicMessageAndError/DisplayLogicMessageAndError";
 
 
@@ -11,23 +11,32 @@ export const CounterTypeUser = () => {
 
     const dispatch = useDispatch()
 
-    const objForCheckConditionsClickIncReset = {
-
+    const objForCheckConditions = {
+        checkIncorrectValuesInc: (
+            counterState.startValue < 0 ||
+            counterState.countUser >= counterState.maxValue ||
+            counterState.startValue >= counterState.maxValue
+        ),
+        checkIncorrectValuesReset: (
+            counterState.countUser === counterState.startValue ||
+            counterState.startValue < 0 ||
+            counterState.startValue >= counterState.maxValue
+        )
     }
 
-    // Проверка на выполнения условий при увеличении - клике на кнопку inc
-    const checkIncorrectValuesInc =
-        counterState.startValue < 0 ||
-        counterState.countUser >= counterState.maxValue ||
-        counterState.startValue >= counterState.maxValue
-    ;
-
-    // Проверка на выполнения условий при увеличении - клике на кнопку reset
-    const checkIncorrectValuesReset =
-        counterState.countUser === counterState.startValue ||
-        counterState.startValue < 0 ||
-        counterState.startValue >= counterState.maxValue
-
+    // // Проверка на выполнения условий при увеличении - клике на кнопку inc
+    // const checkIncorrectValuesInc =
+    //     counterState.startValue < 0 ||
+    //     counterState.countUser >= counterState.maxValue ||
+    //     counterState.startValue >= counterState.maxValue
+    // ;
+    //
+    // // Проверка на выполнения условий при увеличении - клике на кнопку reset
+    // const checkIncorrectValuesReset =
+    //     counterState.countUser === counterState.startValue ||
+    //     counterState.startValue < 0 ||
+    //     counterState.startValue >= counterState.maxValue
+    //
     // const error = (counterState.startValue < 0 || counterState.startValue >= counterState.maxValue) && 'incorrect Value'
 
     const onClickButtonIncHandler = () => {
@@ -50,11 +59,11 @@ export const CounterTypeUser = () => {
             <div className="buttons">
                 <Button title={"inc"}
                         onClick={onClickButtonIncHandler}
-                        disabled={checkIncorrectValuesInc || counterState.incButtonDisabled}
+                        disabled={objForCheckConditions.checkIncorrectValuesInc || counterState.incButtonDisabled}
                 />
                 <Button title={"reset"}
                         onClick={onClickButtonResetHandler}
-                        disabled={checkIncorrectValuesReset || counterState.resetButtonDisabled}
+                        disabled={objForCheckConditions.checkIncorrectValuesReset || counterState.resetButtonDisabled}
                 />
             </div>
         </div>
