@@ -1,24 +1,21 @@
-import React, {Dispatch} from 'react';
+import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../app/store";
+import {type CounterStateType, resetCounterAC, setCountUserAC} from "../../model/counterState-reducer";
 import {Button} from "../Button";
-import {CounterStateType} from "../../AppWithReducer";
-import {
-    CounterStateReducerActionsType,
-    resetCounterAC,
-    setButtonDisabledAC,
-    setCountUserAC
-} from "../../model/counterState-reducer";
-import {UnknownAction} from "redux";
 
-type CounterTypeUserType = {
-    counterState: CounterStateType
-    dispatch: Dispatch<CounterStateReducerActionsType>
-    // dispatch: Dispatch<UnknownAction>
-    // dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
-    // setCounterState: (counterState: CounterStateType) => void
-    // error: string
-}
+// type CounterTypeUserType = {
+//     // counterState: CounterStateType
+//     // dispatch: Dispatch<CounterStateReducerActionsType>
+// }
 
-export const CounterTypeUser = ({counterState, dispatch}: CounterTypeUserType) => {
+export const CounterTypeUser = (
+    // {counterState}: CounterTypeUserType
+) => {
+    const counterState = useSelector<RootState, CounterStateType>(state => state.counterState)
+
+    const dispatch = useDispatch()
+
     // Проверка на выполнения условий при увеличении - клике на кнопку inc
     const checkingIncorrectValuesInc =
         counterState.startValue < 0 ||
@@ -34,38 +31,24 @@ export const CounterTypeUser = ({counterState, dispatch}: CounterTypeUserType) =
 
     const onClickButtonIncHandler = () => {
         if (counterState.countUser < counterState.maxValue) {
-            // dispatchToCounterState({
-            //             //     ...counterState,
-            //             //     countUser: counterState.countUser + 1
-            //             // });
             dispatch(setCountUserAC(counterState.countUser + 1))
         }
     }
     const error = (counterState.startValue < 0 || counterState.startValue >= counterState.maxValue) && 'incorrect Value'
 
     const onClickButtonResetHandler = () => {
-        // dispatchToCounterState({
-        //     ...counterState,
-        //     countUser: 0,
-        //     setButtonDisabled: false
-        // });
-
-        // dispatch(setCountUserAC(0))
-        // dispatch(setButtonDisabledAC(false))
         dispatch(resetCounterAC({
             countUser: 0,
             setButtonDisabled: false
         }))
-
-
     }
 
     return (
         <div>
             {error || counterState.message
                 ? <div className={"counter-display"}>
-                    <div className={`"error" ${error 
-                        ? "error" 
+                    <div className={`"error" ${error
+                        ? "error"
                         : "message"}`}
                     >{error || counterState.message}</div>
                 </div>

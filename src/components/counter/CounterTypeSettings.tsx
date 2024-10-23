@@ -1,44 +1,31 @@
-import React, {ChangeEvent, Dispatch, SetStateAction, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../app/store";
+import {type CounterStateType, setCounterStateAC, updateCounterSettingsAC} from "../../model/counterState-reducer";
 import {Button} from "../Button";
-import {CounterStateType} from "../../AppWithReducer";
 import {Input} from "../Input";
 import {Label} from "../Label";
-import {
-    CounterStateReducerActionsType,
-    setButtonDisabledAC, setCounterStateAC, setIncButtonDisabledAC,
-    setMaxValueAC,
-    setMessageAC, setResetButtonDisabledAC, setStartValueAC, updateCounterSettingsAC
-} from "../../model/counterState-reducer";
-import {UnknownAction} from "redux";
 
-type CounterTypeSettingsType = {
-    counterState: CounterStateType
-    dispatch: Dispatch<CounterStateReducerActionsType>
-    // dispatch: Dispatch<UnknownAction>
-    // dispatchToCounterState: React.Dispatch<CounterStateReducerActionsType>
-    // setCounterState: Dispatch<SetStateAction<CounterStateType>>
-}
+// type CounterTypeSettingsType = {
+//     // counterState: CounterStateType
+//     // dispatch: Dispatch<CounterStateReducerActionsType>
+// }
 
-export const CounterTypeSettings = ({counterState, dispatch}: CounterTypeSettingsType) => {
+export const CounterTypeSettings = (
+    // {counterState}: CounterTypeSettingsType
+) => {
+    const counterState = useSelector<RootState, CounterStateType>(state => state.counterState)
 
     const [maxValue, setMaxValue] = useState(counterState.maxValue);
     const [startValue, setStartValue] = useState(counterState.startValue);
+
+    const dispatch = useDispatch()
 
     const settingsButtonDisabledAndIncorrectInput =
         startValue < 0 || startValue >= maxValue
 
     // При изменении max value в инпуте
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
-        // const newMaxValue = Number(e.currentTarget.value);
-        // setMaxValue(newMaxValue);
-        // dispatchToCounterState({
-        //     ...counterState,
-        //     maxValue: newMaxValue,
-        //     setButtonDisabled: false,
-        //     message: "enter values and press 'set'",
-        //     incButtonDisabled: true,
-        //     resetButtonDisabled: true
-        // });
 
         const newMaxValue = Number(e.currentTarget.value);
         setMaxValue(newMaxValue);
@@ -50,28 +37,10 @@ export const CounterTypeSettings = ({counterState, dispatch}: CounterTypeSetting
             incButtonDisabled: true,
             resetButtonDisabled: true
         }));
-
-        // dispatch(setMaxValueAC(newMaxValue));
-        // dispatch(setButtonDisabledAC(false));
-        // dispatch(setMessageAC("enter values and press 'set'"));
-        // dispatch(setIncButtonDisabledAC(true));
-        // dispatch(setResetButtonDisabledAC(true));
     }
 
     // При изменении start value в инпуте
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
-        // const newStartValue = Number(e.currentTarget.value);
-        // setStartValue(newStartValue);
-        // dispatchToCounterState((prev) => {
-        //     return {
-        //         ...prev,
-        //         startValue: newStartValue,
-        //         setButtonDisabled: false,
-        //         message: "enter values and press 'set'",
-        //         incButtonDisabled: true,
-        //         resetButtonDisabled: true
-        //     }
-        // });
 
         const newStartValue = Number(e.currentTarget.value);
         setStartValue(newStartValue);
@@ -83,27 +52,10 @@ export const CounterTypeSettings = ({counterState, dispatch}: CounterTypeSetting
             incButtonDisabled: true,
             resetButtonDisabled: true
         }))
-
-        // dispatch(setStartValueAC(newStartValue));
-        // dispatch(setButtonDisabledAC(false));
-        // dispatch(setMessageAC("enter values and press 'set'"));
-        // dispatch(setIncButtonDisabledAC(true));
-        // dispatch(setResetButtonDisabledAC(true));
     }
 
     // При клике на кнопку set что у нас происходит
     const onClickButtonSetHandler = () => {
-        // debugger
-        // dispatchToCounterState({
-        //     ...counterState,
-        //     countUser: startValue,
-        //     maxValue: maxValue,
-        //     startValue: startValue,
-        //     message: "", // Обновление сообщения после нажатия на кнопку "set"
-        //     setButtonDisabled: true, // Обновление состояния для управления активностью кнопки "set"
-        //     incButtonDisabled: false, // Обновление состояния для управления активностью кнопки "inc"
-        //     resetButtonDisabled: false, // Обновление состояния для управления активностью кнопки "reset"
-        // });
 
         dispatch(setCounterStateAC({
             countUser: startValue,
