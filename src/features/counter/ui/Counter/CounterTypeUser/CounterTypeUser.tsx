@@ -47,7 +47,7 @@ export const CounterTypeUser = () => {
 
     const onClickButtonResetHandler = () => {
         dispatch(resetCounterAC({
-            countUser: 0,
+            countUser: counterState.startValue,
             setButtonDisabled: false
         }))
     }

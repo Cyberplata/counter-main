@@ -4,6 +4,7 @@ import {RootState} from "../../../../app/store";
 import {type CounterStateType, setCounterStateAC} from "../../model/counterState-reducer";
 
 export const SaveToLocalStorage = () => {
+    // debugger
     const counterState = useSelector<RootState, CounterStateType>(state => state.counterState)
 
     const dispatch = useDispatch()
@@ -12,6 +13,7 @@ export const SaveToLocalStorage = () => {
         const storedState = localStorage.getItem('counterValue');
         if (storedState) {
             const newValue = JSON.parse(storedState);
+            console.log(newValue)
             dispatch(setCounterStateAC(newValue));
         }
     }, [dispatch]);

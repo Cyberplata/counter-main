@@ -6,7 +6,7 @@ import {SaveToLocalStorage} from "../features/counter/ui/saveToLocalStorage/save
 
 export const AppWithRedux = () => {
 
-    SaveToLocalStorage();
+    // SaveToLocalStorage();
 
     return (
         <div className={"App"}>

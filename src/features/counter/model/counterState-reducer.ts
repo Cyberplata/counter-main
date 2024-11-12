@@ -22,7 +22,7 @@ const initialState: CounterStateType = {
 };
 
 export const counterStateReducer = (
-    state: CounterStateType = initialState,
+    state = initialState,
     action: CounterStateReducerActionsType
 ): CounterStateType => {
     switch (action.type) {
@@ -45,24 +45,12 @@ export const counterStateReducer = (
         case 'SET_COUNTER_STATE':
             return {
                 ...state,
-                countUser: action.payload.countUser,
-                maxValue: action.payload.maxValue,
-                startValue: action.payload.startValue,
-                error: action.payload.error,
-                message: action.payload.message,
-                setButtonDisabled: action.payload.setButtonDisabled,
-                incButtonDisabled: action.payload.incButtonDisabled,
-                resetButtonDisabled: action.payload.resetButtonDisabled
+                ...action.payload
             };
         case 'UPDATE_COUNTER_SETTINGS':
             return {
                 ...state,
-                maxValue: action.payload.maxValue,
-                startValue: action.payload.startValue,
-                setButtonDisabled: action.payload.setButtonDisabled,
-                message: action.payload.message,
-                incButtonDisabled: action.payload.incButtonDisabled,
-                resetButtonDisabled: action.payload.resetButtonDisabled
+                ...action.payload
             };
         case "RESET_COUNTER":
             return {

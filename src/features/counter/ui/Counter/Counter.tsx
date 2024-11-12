@@ -9,15 +9,15 @@ type CounterType = {
 }
 
 export const Counter = (props: CounterType) => {
-    const { title, type} = props
+    const {title, type} = props
 
     return (
         <div className="counter">
             <h3 className="title">{title}</h3>
-            <div>
-                {type === "settings" && <CounterTypeSettings/>}
-                {type === "user" && <CounterTypeUser/>}
-            </div>
+            {/*<div>*/}
+            {type === "settings" && <CounterTypeSettings/>}
+            {type === "user" && <CounterTypeUser/>}
+            {/*</div>*/}
         </div>
     );
 };
