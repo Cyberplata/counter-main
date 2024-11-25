@@ -3,56 +3,32 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../../../app/store"
 import { Input } from "../../../../../../common/components/Input/Input"
 import { Label } from "../../../../../../common/components/Label/Label"
-import { type CounterStateType, setMaxValueAC } from "../../../../model/counterState-reducer"
+import { type CounterStateType, setMaxValueAC, setStartValueAC } from "../../../../model/counterState-reducer"
 
-export const DisplayWithSettings = () => {
-   const counterState = useSelector<RootState, CounterStateType>((state) => state.counterState)
-   const [message, setMessage] = useState("")
+type Props = {
+   message: string
+   setMessage: (message: string) => void
+}
 
+export const DisplayWithSettings = ({ message, setMessage }: Props) => {
+   const { maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
    const dispatch = useDispatch()
-
-   // const [maxValue, setMaxValue] = useState(counterState.maxValue)
-   // const [startValue, setStartValue] = useState(counterState.startValue)
 
    // При изменении max value в инпуте
    const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
       const newMaxValue = Number(e.currentTarget.value)
-
       dispatch(setMaxValueAC(newMaxValue))
-      setMessage("enter values and press 'set'")
-
-      // setMaxValue(newMaxValue)
-      // dispatch(
-      //    updateCounterSettingsAC({
-      //       maxValue: newMaxValue,
-      //       startValue,
-      //       setButtonDisabled: false,
-      //       message: "enter values and press 'set'",
-      //       incButtonDisabled: true,
-      //       resetButtonDisabled: true,
-      //    }),
-      // )
+      setMessage("Enter values and press 'set'")
    }
 
    // При изменении start value в инпуте
    const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
       const newStartValue = Number(e.currentTarget.value)
-
-      // setStartValue(newStartValue)
-      // dispatch(
-      //    updateCounterSettingsAC({
-      //       maxValue,
-      //       startValue: newStartValue,
-      //       setButtonDisabled: false,
-      //       message: "enter values and press 'set'",
-      //       incButtonDisabled: true,
-      //       resetButtonDisabled: true,
-      //    }),
-      // )
+      dispatch(setStartValueAC(newStartValue))
+      setMessage("Enter values and press 'set'")
    }
 
-   const settingsButtonDisabledAndIncorrectInput =
-      counterState.startValue < 0 || counterState.startValue >= counterState.maxValue
+   const settingsButtonDisabledAndIncorrectInput = startValue < 0 || startValue >= maxValue
 
    return (
       <div className={"counter-display settings"}>
@@ -60,9 +36,9 @@ export const DisplayWithSettings = () => {
             max value:
             <Input
                id={"maxValueInput"}
-               className={`inputSettings ${counterState.startValue >= counterState.maxValue ? "red" : ""}`}
+               className={`inputSettings ${startValue >= maxValue ? "red" : ""}`}
                type="number"
-               value={counterState.maxValue}
+               value={maxValue}
                onChange={onChangeMaxValueHandler}
             />
          </Label>
@@ -72,7 +48,7 @@ export const DisplayWithSettings = () => {
                id={"startValueInput"}
                className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
                type="number"
-               value={counterState.startValue}
+               value={startValue}
                onChange={onChangeStartValueHandler}
             />
          </Label>

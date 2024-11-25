@@ -2,56 +2,34 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../../app/store"
 import { Button } from "../../../../../common/components/Button/Button"
-import {
-   type CounterStateType,
-   setCountUserAC,
-   setMaxValueAC,
-   setStartValueAC,
-} from "../../../model/counterState-reducer"
+import { type CounterStateType, setCounterStateAC } from "../../../model/counterState-reducer"
 import { DisplayWithSettings } from "./DisplayWithSettings/DisplayWithSettings"
 
 export const CounterTypeSettings = () => {
-   const counterState = useSelector<RootState, CounterStateType>((state) => state.counterState)
-   const [error, setError] = useState("")
-   const [message, setMessage] = useState("")
-   const [setButtonDisabled, setSetButtonDisabled] = useState(false)
-   const [incButtonDisabled, setIncButtonDisabled] = useState(false)
-
+   const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
    const dispatch = useDispatch()
 
-   // const [maxValue, setMaxValue] = useState(counterState.maxValue);
-   // const [startValue, setStartValue] = useState(counterState.startValue);
+   const [message, setMessage] = useState("")
+   const [setButtonDisabled, setSetButtonDisabled] = useState(true)
 
    // При клике на кнопку set что у нас происходит
    const onClickButtonSetHandler = () => {
-      // dispatch(
-      //    setCounterStateAC({
-      //       countUser: counterState.startValue,
-      //       maxValue: counterState.maxValue,
-      //       startValue: counterState.startValue,
-      //       error: "",
-      //       message: "",
-      //       setButtonDisabled: true,
-      //       incButtonDisabled: false,
-      //       resetButtonDisabled: false,
-      //    }),
-      // )
-      setError("")
-      setMessage("")
+      dispatch(
+         setCounterStateAC({
+            countUser: countUser,
+            maxValue: maxValue,
+            startValue: startValue,
+         }),
+      )
       setSetButtonDisabled(true)
-      setIncButtonDisabled(false)
-
-      dispatch(setCountUserAC(counterState.countUser))
-      dispatch(setMaxValueAC(counterState.maxValue))
-      dispatch(setStartValueAC(counterState.countUser))
+      setMessage("")
    }
 
-   const settingsButtonDisabledAndIncorrectInput =
-      counterState.startValue < 0 || counterState.startValue >= counterState.maxValue
+   const settingsButtonDisabledAndIncorrectInput = startValue < 0 || startValue >= maxValue
 
    return (
       <div>
-         <DisplayWithSettings />
+         <DisplayWithSettings message={message} setMessage={setMessage} />
          <div className="buttons">
             <Button
                title={"set"}
