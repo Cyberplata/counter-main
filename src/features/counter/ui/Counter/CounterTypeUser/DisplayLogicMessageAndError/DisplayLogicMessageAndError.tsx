@@ -4,31 +4,22 @@ import { RootState } from "../../../../../../app/store"
 import type { CounterStateType } from "../../../../model/counterState-reducer"
 
 export const DisplayLogicMessageAndError = () => {
-   const counterState = useSelector<RootState, CounterStateType>((state) => state.counterState)
+   const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
    const [message, setMessage] = useState("")
 
-   const error = (counterState.startValue < 0 || counterState.startValue >= counterState.maxValue) && "incorrect Value"
-
-   // const checkMessage = () => {
-   //    if (error) {
-   //       return setMessage(message)
-   //    }
-   // }
+   const error = (startValue < 0 || startValue >= maxValue) && "incorrect Value"
 
    // Проверка на выполнения условий при увеличении - клике на кнопку inc
-   const checkIncorrectValuesInc =
-      counterState.startValue < 0 ||
-      counterState.countUser >= counterState.maxValue ||
-      counterState.startValue >= counterState.maxValue
+   const checkIncorrectValuesInc = startValue < 0 || countUser >= maxValue || startValue >= maxValue
+
    return (
       <>
-         {/*{error || counterState.message ? (*/}
          {error || message ? (
             <div className={"counter-display"}>
                <div className={`"error" ${error ? "error" : "message"}`}>{error || message}</div>
             </div>
          ) : (
-            <div className={`counter-display ${checkIncorrectValuesInc ? "red" : ""}`}>{counterState.countUser}</div>
+            <div className={`counter-display ${checkIncorrectValuesInc ? "red" : ""}`}>{countUser}</div>
          )}
       </>
    )

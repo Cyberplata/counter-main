@@ -5,20 +5,25 @@ import { Input } from "../../../../../../common/components/Input/Input"
 import { Label } from "../../../../../../common/components/Label/Label"
 import { type CounterStateType, setMaxValueAC, setStartValueAC } from "../../../../model/counterState-reducer"
 
-type Props = {
-   message: string
-   setMessage: (message: string) => void
-}
+// type Props = {
+//    message: string
+//    setMessage: (message: string) => void
+// }
 
-export const DisplayWithSettings = ({ message, setMessage }: Props) => {
+// export const DisplayWithSettings = ({ setMessage }: Props) => {
+export const DisplayWithSettings = () => {
    const { maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
    const dispatch = useDispatch()
+
+   const [message, setMessage] = useState("")
+   const [buttonDisabled, setButtonDisabled] = useState(false)
 
    // При изменении max value в инпуте
    const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
       const newMaxValue = Number(e.currentTarget.value)
       dispatch(setMaxValueAC(newMaxValue))
       setMessage("Enter values and press 'set'")
+      setButtonDisabled(buttonDisabled)
    }
 
    // При изменении start value в инпуте
@@ -26,6 +31,7 @@ export const DisplayWithSettings = ({ message, setMessage }: Props) => {
       const newStartValue = Number(e.currentTarget.value)
       dispatch(setStartValueAC(newStartValue))
       setMessage("Enter values and press 'set'")
+      setButtonDisabled(buttonDisabled)
    }
 
    const settingsButtonDisabledAndIncorrectInput = startValue < 0 || startValue >= maxValue

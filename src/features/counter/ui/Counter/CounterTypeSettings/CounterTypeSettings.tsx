@@ -9,8 +9,8 @@ export const CounterTypeSettings = () => {
    const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
    const dispatch = useDispatch()
 
-   const [message, setMessage] = useState("")
-   const [setButtonDisabled, setSetButtonDisabled] = useState(true)
+   // const [message, setMessage] = useState("")
+   const [buttonDisabled, setButtonDisabled] = useState(true)
 
    // При клике на кнопку set что у нас происходит
    const onClickButtonSetHandler = () => {
@@ -21,20 +21,21 @@ export const CounterTypeSettings = () => {
             startValue: startValue,
          }),
       )
-      setSetButtonDisabled(true)
-      setMessage("")
+      setButtonDisabled(true)
+      // setMessage("")
    }
 
    const settingsButtonDisabledAndIncorrectInput = startValue < 0 || startValue >= maxValue
 
    return (
       <div>
-         <DisplayWithSettings message={message} setMessage={setMessage} />
+         {/*<DisplayWithSettings message={message} setMessage={setMessage} />*/}
+         <DisplayWithSettings />
          <div className="buttons">
             <Button
                title={"set"}
                onClick={onClickButtonSetHandler}
-               disabled={setButtonDisabled || settingsButtonDisabledAndIncorrectInput}
+               disabled={buttonDisabled || settingsButtonDisabledAndIncorrectInput}
             />
          </div>
       </div>
