@@ -86,4 +86,4 @@
 //
 // export default App;
 // Добавляем пустой экспорт, чтобы TypeScript рассматривал этот файл как модуль
-export {};
+export {}

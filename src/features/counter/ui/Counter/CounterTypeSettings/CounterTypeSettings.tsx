@@ -1,45 +1,64 @@
-import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../../../../app/store";
-import {Button} from "../../../../../common/components/Button/Button";
-import {type CounterStateType, setCounterStateAC} from "../../../model/counterState-reducer";
-import {DisplayWithSettings} from "./DisplayWithSettings/DisplayWithSettings";
-
+import React, { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../../../../app/store"
+import { Button } from "../../../../../common/components/Button/Button"
+import {
+   type CounterStateType,
+   setCountUserAC,
+   setMaxValueAC,
+   setStartValueAC,
+} from "../../../model/counterState-reducer"
+import { DisplayWithSettings } from "./DisplayWithSettings/DisplayWithSettings"
 
 export const CounterTypeSettings = () => {
-    const counterState = useSelector<RootState, CounterStateType>(state => state.counterState)
-    const dispatch = useDispatch()
+   const counterState = useSelector<RootState, CounterStateType>((state) => state.counterState)
+   const [error, setError] = useState("")
+   const [message, setMessage] = useState("")
+   const [setButtonDisabled, setSetButtonDisabled] = useState(false)
+   const [incButtonDisabled, setIncButtonDisabled] = useState(false)
 
-    // const [maxValue, setMaxValue] = useState(counterState.maxValue);
-    // const [startValue, setStartValue] = useState(counterState.startValue);
+   const dispatch = useDispatch()
 
+   // const [maxValue, setMaxValue] = useState(counterState.maxValue);
+   // const [startValue, setStartValue] = useState(counterState.startValue);
 
-    // При клике на кнопку set что у нас происходит
-    const onClickButtonSetHandler = () => {
-        dispatch(setCounterStateAC({
-            countUser: counterState.startValue,
-            maxValue: counterState.maxValue,
-            startValue: counterState.startValue,
-            error: "",
-            message: "",
-            setButtonDisabled: true,
-            incButtonDisabled: false,
-            resetButtonDisabled: false,
-        }));
-    }
+   // При клике на кнопку set что у нас происходит
+   const onClickButtonSetHandler = () => {
+      // dispatch(
+      //    setCounterStateAC({
+      //       countUser: counterState.startValue,
+      //       maxValue: counterState.maxValue,
+      //       startValue: counterState.startValue,
+      //       error: "",
+      //       message: "",
+      //       setButtonDisabled: true,
+      //       incButtonDisabled: false,
+      //       resetButtonDisabled: false,
+      //    }),
+      // )
+      setError("")
+      setMessage("")
+      setSetButtonDisabled(true)
+      setIncButtonDisabled(false)
 
-    const settingsButtonDisabledAndIncorrectInput =
-        counterState.startValue < 0 || counterState.startValue >= counterState.maxValue
+      dispatch(setCountUserAC(counterState.countUser))
+      dispatch(setMaxValueAC(counterState.maxValue))
+      dispatch(setStartValueAC(counterState.countUser))
+   }
 
-    return (
-        <div>
-            <DisplayWithSettings/>
-            <div className="buttons">
-                <Button title={"set"}
-                        onClick={onClickButtonSetHandler}
-                        disabled={counterState.setButtonDisabled || settingsButtonDisabledAndIncorrectInput}
-                />
-            </div>
-        </div>
-    );
-};
+   const settingsButtonDisabledAndIncorrectInput =
+      counterState.startValue < 0 || counterState.startValue >= counterState.maxValue
+
+   return (
+      <div>
+         <DisplayWithSettings />
+         <div className="buttons">
+            <Button
+               title={"set"}
+               onClick={onClickButtonSetHandler}
+               disabled={setButtonDisabled || settingsButtonDisabledAndIncorrectInput}
+            />
+         </div>
+      </div>
+   )
+}
