@@ -7,18 +7,19 @@ import { Label } from "../../../../../common/components/Label/Label"
 import {
    type CounterStateType,
    setCounterStateAC,
-   setMaxValueAC,
+   setMaxValueAC, setMessageAC,
    setStartValueAC
 } from "../../../model/counterState-reducer"
 
 type Props = {
-   message: string
-   setMessage: (message: string) => void
+   // message: string
+   // setMessage: (message: string) => void
    buttonDisabled: boolean
    setButtonDisabled: (buttonDisabled: boolean) => void
 }
 
-export const CounterTypeSettings = ({ setMessage, buttonDisabled, setButtonDisabled }: Props) => {
+// export const CounterTypeSettings = ({ setMessage, buttonDisabled, setButtonDisabled }: Props) => {
+export const CounterTypeSettings = ({ buttonDisabled, setButtonDisabled }: Props) => {
    const { maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
    const dispatch = useDispatch()
    debugger
@@ -31,7 +32,8 @@ export const CounterTypeSettings = ({ setMessage, buttonDisabled, setButtonDisab
       setButtonDisabled(true)
 
       if (newMaxValue > startValue) {
-         setMessage("Enter values and press 'set'");
+         // setMessage("Enter values and press 'set'");
+         dispatch(setMessageAC("Enter values and press 'set'"));
       }
    }
 
@@ -44,7 +46,8 @@ export const CounterTypeSettings = ({ setMessage, buttonDisabled, setButtonDisab
       setButtonDisabled(true)
 
       if (newStartValue < maxValue) {
-         setMessage("Enter values and press 'set'");
+         // setMessage("Enter values and press 'set'");
+         dispatch(setMessageAC("Enter values and press 'set'"));
       }
    }
 
@@ -57,7 +60,7 @@ export const CounterTypeSettings = ({ setMessage, buttonDisabled, setButtonDisab
          })
       )
       setButtonDisabled(false)
-      setMessage("")
+      dispatch(setMessageAC(""));
    }
 
 

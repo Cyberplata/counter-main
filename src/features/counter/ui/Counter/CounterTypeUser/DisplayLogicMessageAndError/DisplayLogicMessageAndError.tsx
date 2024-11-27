@@ -3,12 +3,13 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../../../../app/store"
 import type { CounterStateType } from "../../../../model/counterState-reducer"
 
-type Props = {
-   message: string
-}
+// type Props = {
+//    message: string
+// }
 
-export const DisplayLogicMessageAndError = ({ message }: Props) => {
-   const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
+// export const DisplayLogicMessageAndError = ({ message }: Props) => {
+export const DisplayLogicMessageAndError = () => {
+   const { countUser, maxValue, startValue, message } = useSelector<RootState, CounterStateType>((state) => state.counterState)
 
    const error = (startValue < 0 || startValue >= maxValue) ? "incorrect Value" : null
 

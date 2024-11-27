@@ -6,12 +6,13 @@ import { type CounterStateType, setCounterStateAC, setCountUserAC } from "../../
 import { DisplayLogicMessageAndError } from "./DisplayLogicMessageAndError/DisplayLogicMessageAndError"
 
 type Props = {
-   message: string
+   // message: string
    buttonDisabled: boolean
    setButtonDisabled: (buttonDisabled: boolean) => void
 }
 
-export const CounterTypeUser = ({ message, buttonDisabled, setButtonDisabled }: Props) => {
+// export const CounterTypeUser = ({ message, buttonDisabled, setButtonDisabled }: Props) => {
+export const CounterTypeUser = ({ buttonDisabled, setButtonDisabled }: Props) => {
    const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
 
    const dispatch = useDispatch()
@@ -41,7 +42,8 @@ export const CounterTypeUser = ({ message, buttonDisabled, setButtonDisabled }: 
 
    return (
       <div>
-         <DisplayLogicMessageAndError message={message} />
+         <DisplayLogicMessageAndError />
+         {/*<DisplayLogicMessageAndError message={message} />*/}
 
          <div className="buttons">
             <Button
