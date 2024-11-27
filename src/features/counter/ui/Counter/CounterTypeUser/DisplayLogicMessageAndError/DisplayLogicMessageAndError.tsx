@@ -1,13 +1,16 @@
-import React, { useState } from "react"
+import React from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../../../app/store"
 import type { CounterStateType } from "../../../../model/counterState-reducer"
 
-export const DisplayLogicMessageAndError = () => {
-   const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
-   const [message, setMessage] = useState("")
+type Props = {
+   message: string
+}
 
-   const error = (startValue < 0 || startValue >= maxValue) && "incorrect Value"
+export const DisplayLogicMessageAndError = ({ message }: Props) => {
+   const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
+
+   const error = (startValue < 0 || startValue >= maxValue) ? "incorrect Value" : null
 
    // Проверка на выполнения условий при увеличении - клике на кнопку inc
    const checkIncorrectValuesInc = startValue < 0 || countUser >= maxValue || startValue >= maxValue
@@ -23,4 +26,15 @@ export const DisplayLogicMessageAndError = () => {
          )}
       </>
    )
+   // return (
+   //    <div className="counter-display">
+   //       {error ? (
+   //          <div className="error">{error}</div>
+   //       ) : message ? (
+   //          <div className="message">{message}</div>
+   //       ) : (
+   //          <div>{startValue}</div>
+   //       )}
+   //    </div>
+   // );
 }

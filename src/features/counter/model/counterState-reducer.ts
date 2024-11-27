@@ -3,12 +3,14 @@ export type CounterStateType = {
    countUser: number
    maxValue: number
    startValue: number
+   message: string
 }
 
 const initialState: CounterStateType = {
    countUser: 0,
    maxValue: 5,
    startValue: 0,
+   message: ""
 }
 
 export const counterStateReducer = (state = initialState, action: CounterStateReducerActionsType): CounterStateType => {
@@ -21,6 +23,8 @@ export const counterStateReducer = (state = initialState, action: CounterStateRe
          return { ...state, startValue: action.startValue }
       case "SET_COUNTER_STATE":
          return { ...state, ...action.payload }
+      case "SET_MESSAGE":
+         return {...state, message: action.message}
       default:
          return state
    }
@@ -30,36 +34,43 @@ export const counterStateReducer = (state = initialState, action: CounterStateRe
 export const setCountUserAC = (countUser: number) => {
    return {
       type: "SET_COUNT_USER",
-      countUser,
+      countUser
    } as const
 }
 
 export const setMaxValueAC = (maxValue: number) => {
    return {
       type: "SET_MAX_VALUE",
-      maxValue,
+      maxValue
    } as const
 }
 
 export const setStartValueAC = (startValue: number) => {
    return {
       type: "SET_START_VALUE",
-      startValue,
+      startValue
    } as const
 }
 
 export const setCounterStateAC = (payload: { countUser: number; maxValue: number; startValue: number }) => {
    return {
       type: "SET_COUNTER_STATE",
-      payload,
+      payload
    } as const
 }
+
+// Экшен для обновления сообщения
+export const setMessageAC = (message: string) => ({
+   type: "SET_MESSAGE",
+   message
+} as const)
 
 // запись через ReturnType Actions type
 export type setCountUserActionType = ReturnType<typeof setCountUserAC>
 export type setMaxValueActionType = ReturnType<typeof setMaxValueAC>
 export type setStartValueActionType = ReturnType<typeof setStartValueAC>
 export type setCounterStateActionType = ReturnType<typeof setCounterStateAC>
+export type setMessageActionType = ReturnType<typeof setMessageAC>
 
 // // Лучше создать перечисление для типов экшенов, чтобы избежать ошибок:
 // // Экшен-тайпы
@@ -76,3 +87,4 @@ export type CounterStateReducerActionsType =
    | setMaxValueActionType
    | setStartValueActionType
    | setCounterStateActionType
+   | setMessageActionType
