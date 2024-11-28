@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../app/store"
-import { type CounterStateType, setCountUserAC } from "../../model/counterState-reducer"
+import { type CounterNumbersStateType, setCountUserAC } from "../../model/counterNumbersStateReducer"
 
 export const SaveToLocalStorage = () => {
    // debugger
-   const counterState = useSelector<RootState, CounterStateType>((state) => state.counterState)
+   const counterNumbers = useSelector<RootState, CounterNumbersStateType>((state) => state.numbersState)
 
    const dispatch = useDispatch()
 
@@ -23,10 +23,10 @@ export const SaveToLocalStorage = () => {
       localStorage.setItem(
          "counterValue",
          JSON.stringify({
-            countUser: counterState.countUser,
-            maxValue: counterState.maxValue,
-            startValue: counterState.startValue,
+            countUser: counterNumbers.countUser,
+            maxValue: counterNumbers.maxValue,
+            startValue: counterNumbers.startValue,
          }),
       )
-   }, [counterState])
+   }, [counterNumbers])
 }

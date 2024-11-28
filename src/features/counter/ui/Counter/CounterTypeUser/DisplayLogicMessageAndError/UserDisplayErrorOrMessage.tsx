@@ -4,10 +4,10 @@ import { RootState } from "../../../../../../app/store"
 
 
 export const UserDisplayErrorOrMessage = () => {
-   const countUser = useSelector<RootState, number>((state) => state.counterState.countUser)
-   const maxValue = useSelector<RootState, number>((state) => state.counterState.maxValue)
-   const startValue = useSelector<RootState, number>((state) => state.counterState.startValue)
-   const message = useSelector<RootState, string>((state) => state.counterState.message)
+   const countUser = useSelector<RootState, number>((state) => state.numbersState.countUser)
+   const maxValue = useSelector<RootState, number>((state) => state.numbersState.maxValue)
+   const startValue = useSelector<RootState, number>((state) => state.numbersState.startValue)
+   const message = useSelector<RootState, string>((state) => state.uiState.message)
 
    const error = (startValue < 0 || startValue >= maxValue) ? "incorrect Value" : null
    const errorClassName = error ? "error" : "message"

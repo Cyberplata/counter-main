@@ -2,11 +2,11 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../../../app/store"
 import { Button } from "../../../../../../common/components/Button/Button"
-import { setCounterStateAC } from "../../../../model/counterState-reducer"
+import { setCounterStateAC } from "../../../../model/counterNumbersStateReducer"
 
 export const UserButtonReset = () => {
-   const maxValue = useSelector<RootState, number>((state) => state.counterState.maxValue)
-   const startValue = useSelector<RootState, number>((state) => state.counterState.startValue)
+   const maxValue = useSelector<RootState, number>((state) => state.numbersState.maxValue)
+   const startValue = useSelector<RootState, number>((state) => state.numbersState.startValue)
 
    const dispatch = useDispatch()
 

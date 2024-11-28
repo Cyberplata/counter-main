@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../../../app/store"
 import { Input } from "../../../../../../common/components/Input/Input"
 import { Label } from "../../../../../../common/components/Label/Label"
-import { setMaxValueAC } from "../../../../model/counterState-reducer"
+import { setMaxValueAC } from "../../../../model/counterNumbersStateReducer"
 
 export const MaxValueInput = () => {
-   const maxValue = useSelector<RootState, number>((state) => state.counterState.maxValue)
+   const maxValue = useSelector<RootState, number>((state) => state.numbersState.maxValue)
    const errorClassName = useSelector<RootState, string>((state) => {
-      return state.counterState.startValue > state.counterState.maxValue ? "red" : ""
+      return state.numbersState.startValue > state.numbersState.maxValue ? "red" : ""
    })
 
    const dispatch = useDispatch()

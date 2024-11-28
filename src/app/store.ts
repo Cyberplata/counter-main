@@ -1,10 +1,12 @@
 import { combineReducers, legacy_createStore } from "redux"
-import { counterStateReducer } from "../features/counter/model/counterState-reducer"
+import { counterNumbersStateReducer } from "../features/counter/model/counterNumbersStateReducer"
+import { counterUIStateReducer } from "../features/counter/model/counterUIStateReducer"
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
-   counterState: counterStateReducer,
+   numbersState: counterNumbersStateReducer,
+   uiState: counterUIStateReducer
 })
 // непосредственно создаём store
 export const store = legacy_createStore(rootReducer)
