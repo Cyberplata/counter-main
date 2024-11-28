@@ -4,18 +4,23 @@ import { RootState } from "../../../../../../app/store"
 import { Input } from "../../../../../../common/components/Input/Input"
 import { Label } from "../../../../../../common/components/Label/Label"
 import { setStartValueAC } from "../../../../model/counterNumbersStateReducer"
+import { setUIStateAC } from "../../../../model/counterUIStateReducer"
 
 export const StartValueInput = () => {
    const startValue = useSelector<RootState, number>((state) => state.numbersState.startValue)
    const errorClassName = useSelector<RootState, string>((state) => {
       return state.numbersState.startValue < 0 || state.numbersState.startValue >= state.numbersState.maxValue || state.numbersState.maxValue < 0 ? "red" : ""
    })
+   // const disabled = useSelector<RootState, boolean>((state) => state.uiState.disabled)
 
    const dispatch = useDispatch()
 
    const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
       const newStartValue = Number(e.currentTarget.value)
       dispatch(setStartValueAC(newStartValue))
+      // dispatch(setDisabledAC(false))
+      // dispatch(setMessageAC("enter values and press 'set'"))
+      dispatch(setUIStateAC({ message: "enter values and press 'set'", disabled: false }))
    }
 
    return <Label htmlFor={"startValueInput"}>

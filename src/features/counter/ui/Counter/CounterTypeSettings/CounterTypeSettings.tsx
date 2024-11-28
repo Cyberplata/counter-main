@@ -1,6 +1,6 @@
 import React from "react"
 import { MaxValueInput } from "./MaxValueInput/MaxValueInput"
-import { SettingsButton } from "./SettingsButton/SettingsButton"
+import { SettingsButtonSet } from "./SettingsButton/SettingsButtonSet"
 import { StartValueInput } from "./StartValueInput/StartValueInput"
 
 
@@ -12,7 +12,7 @@ export const CounterTypeSettings = () => {
             <StartValueInput/>
          </div>
          <div className="buttons">
-            <SettingsButton/>
+            <SettingsButtonSet/>
          </div>
       </div>
    )

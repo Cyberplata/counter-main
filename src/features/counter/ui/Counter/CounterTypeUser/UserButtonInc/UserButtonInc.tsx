@@ -8,10 +8,12 @@ export const UserButtonInc = () => {
    const countUser = useSelector<RootState, number>((state) => state.numbersState.countUser)
    const maxValue = useSelector<RootState, number>((state) => state.numbersState.maxValue)
    const startValue = useSelector<RootState, number>((state) => state.numbersState.startValue)
+   const disabled = useSelector<RootState, boolean>((state) => state.uiState.disabled)
 
    const dispatch = useDispatch()
 
-   const checkIncorrectValuesInc = startValue < 0 || countUser >= maxValue || startValue >= maxValue
+   // const checkIncorrectValuesInc = startValue < 0 || countUser >= maxValue || startValue >= maxValue
+   const checkIncorrectValuesInc = startValue < 0 || countUser > maxValue || startValue >= maxValue
 
    const onClickButtonIncHandler = () => {
       if (countUser < maxValue) {
@@ -23,6 +25,6 @@ export const UserButtonInc = () => {
       title={"inc"}
       onClick={onClickButtonIncHandler}
       // disabled={checkIncorrectValuesInc || buttonDisabled}
-      disabled={checkIncorrectValuesInc}
+      disabled={!disabled || checkIncorrectValuesInc}
    />
 }

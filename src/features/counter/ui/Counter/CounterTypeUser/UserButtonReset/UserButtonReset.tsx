@@ -7,6 +7,7 @@ import { setCounterStateAC } from "../../../../model/counterNumbersStateReducer"
 export const UserButtonReset = () => {
    const maxValue = useSelector<RootState, number>((state) => state.numbersState.maxValue)
    const startValue = useSelector<RootState, number>((state) => state.numbersState.startValue)
+   const disabled = useSelector<RootState, boolean>((state) => state.uiState.disabled)
 
    const dispatch = useDispatch()
 
@@ -26,6 +27,6 @@ export const UserButtonReset = () => {
    return <Button
       title={"reset"}
       onClick={onClickButtonResetHandler}
-      disabled={checkIncorrectValuesReset}
+      disabled={!disabled || checkIncorrectValuesReset}
    />
 }

@@ -9,8 +9,6 @@ type Props = {
 
 export const Counter = (props: Props) => {
    const { title, type } = props
-   // const [message, setMessage] = useState("")
-   // const [buttonDisabled, setButtonDisabled] = useState(false)
 
    return (
       <div className="counter">
@@ -19,24 +17,4 @@ export const Counter = (props: Props) => {
          { type === "user" && <CounterTypeUser /> }
       </div>
    )
-   // return (
-   //    <div className="counter">
-   //       <h3 className="title">{title}</h3>
-   //       <div style={{ display: type === "settings" ? "block" : "none" }}>
-   //          <CounterTypeSettings
-   //             message={message}
-   //             setMessage={setMessage}
-   //             buttonDisabled={buttonDisabled}
-   //             setButtonDisabled={setButtonDisabled}
-   //          />
-   //       </div>
-   //       <div style={{ display: type === "user" ? "block" : "none" }}>
-   //          <CounterTypeUser
-   //             message={message}
-   //             buttonDisabled={buttonDisabled}
-   //             setButtonDisabled={setButtonDisabled}
-   //          />
-   //       </div>
-   //    </div>
-   // );
 }
