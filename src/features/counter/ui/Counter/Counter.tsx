@@ -9,7 +9,7 @@ type Props = {
 
 export const Counter = (props: Props) => {
    const { title, type } = props
-   // const [message, setMessage] = useState("")
+   const [message, setMessage] = useState("")
    const [buttonDisabled, setButtonDisabled] = useState(false)
 
    return (

@@ -12,44 +12,14 @@ import {
 } from "../../../model/counterState-reducer"
 
 type Props = {
-   // message: string
-   // setMessage: (message: string) => void
    buttonDisabled: boolean
    setButtonDisabled: (buttonDisabled: boolean) => void
 }
 
-// export const CounterTypeSettings = ({ setMessage, buttonDisabled, setButtonDisabled }: Props) => {
 export const CounterTypeSettings = ({ buttonDisabled, setButtonDisabled }: Props) => {
    const { maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
    const dispatch = useDispatch()
    debugger
-   // При изменении max value в инпуте
-   const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      debugger
-      const newMaxValue = Number(e.currentTarget.value)
-      dispatch(setMaxValueAC(newMaxValue))
-      // setMessage("Enter values and press 'set'")
-      setButtonDisabled(true)
-
-      if (newMaxValue > startValue) {
-         // setMessage("Enter values and press 'set'");
-         dispatch(setMessageAC("Enter values and press 'set'"));
-      }
-   }
-
-   // При изменении start value в инпуте
-   const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      debugger
-      const newStartValue = Number(e.currentTarget.value)
-      dispatch(setStartValueAC(newStartValue))
-      // setMessage("Enter values and press 'set'")
-      setButtonDisabled(true)
-
-      if (newStartValue < maxValue) {
-         // setMessage("Enter values and press 'set'");
-         dispatch(setMessageAC("Enter values and press 'set'"));
-      }
-   }
 
    // При клике на кнопку set что у нас происходит
    const onClickButtonSetHandler = () => {
@@ -64,44 +34,77 @@ export const CounterTypeSettings = ({ buttonDisabled, setButtonDisabled }: Props
    }
 
 
-   // const settingsButtonDisabledAndIncorrectInput = startValue < 0 || startValue >= maxValue
    const settingsButtonDisabledAndIncorrectInput = startValue < 0 || startValue >= maxValue || maxValue < 0
 
    return (
       <div>
          {/*<DisplayWithSettings message={message} setMessage={setMessage} />*/}
-         {/*<DisplayWithSettings />*/}
 
          <div className={"counter-display settings"}>
-            <Label htmlFor={"maxValueInput"}>
-               max value:
-               <Input
-                  id={"maxValueInput"}
-                  className={`inputSettings ${startValue >= maxValue ? "red" : ""}`}
-                  type="number"
-                  value={maxValue}
-                  onChange={onChangeMaxValueHandler}
-               />
-            </Label>
-            <Label htmlFor={"startValueInput"}>
-               start value:
-               <Input
-                  id={"startValueInput"}
-                  className={`inputSettings ${settingsButtonDisabledAndIncorrectInput ? "red" : ""}`}
-                  type="number"
-                  value={startValue}
-                  onChange={onChangeStartValueHandler}
-               />
-            </Label>
+            <MaxValueInput/>
+            <StartValueInput/>
          </div>
          <div className="buttons">
             <Button
                title={"set"}
                onClick={onClickButtonSetHandler}
-               // disabled={!buttonDisabled || settingsButtonDisabledAndIncorrectInput}
                disabled={!buttonDisabled || settingsButtonDisabledAndIncorrectInput}
             />
          </div>
       </div>
    )
+}
+
+const MaxValueInput = () => {
+   const  maxValue = useSelector<RootState, number >((state) => state.counterState.maxValue)
+   const errorClassName= useSelector<RootState, string>((state) => {
+      return state.counterState?.startValue > state.counterState?.maxValue ? 'red' : ''
+   })
+
+   const dispatch = useDispatch()
+
+   const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      debugger
+      const newMaxValue = Number(e.currentTarget.value)
+      dispatch(setMaxValueAC(newMaxValue))
+   }
+
+
+   return <Label htmlFor={"maxValueInput"}>
+      max value:
+      <Input
+         id={"maxValueInput"}
+         className={`inputSettings ${errorClassName}`}
+         type="number"
+         value={maxValue}
+         onChange={onChangeMaxValueHandler}
+      />
+   </Label>
+}
+
+const StartValueInput = () => {
+   const  startValue = useSelector<RootState, number >((state) => state.counterState?.startValue)
+   const errorClassName= useSelector<RootState, string>((state) => {
+      return state.counterState.startValue < 0 || state.counterState.startValue >= state.counterState.maxValue ||  state.counterState.maxValue < 0 ? 'red' : ''
+   })
+
+   const dispatch = useDispatch()
+
+   const onChangeStartValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+      // debugger
+      const newStartValue = Number(e.currentTarget.value)
+      dispatch(setStartValueAC(newStartValue))
+   }
+
+
+   return  <Label htmlFor={"startValueInput"}>
+      start value:
+      <Input
+         id={"startValueInput"}
+         className={`inputSettings ${errorClassName}`}
+         type="number"
+         value={startValue}
+         onChange={onChangeStartValueHandler}
+      />
+   </Label>
 }
