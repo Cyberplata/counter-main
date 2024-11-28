@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { CounterTypeSettings } from "./CounterTypeSettings/CounterTypeSettings"
 import { CounterTypeUser } from "./CounterTypeUser/CounterTypeUser"
 
@@ -9,22 +9,14 @@ type Props = {
 
 export const Counter = (props: Props) => {
    const { title, type } = props
-   const [message, setMessage] = useState("")
-   const [buttonDisabled, setButtonDisabled] = useState(false)
+   // const [message, setMessage] = useState("")
+   // const [buttonDisabled, setButtonDisabled] = useState(false)
 
    return (
       <div className="counter">
          <h3 className="title">{title}</h3>
-         {type === "settings" &&
-            <CounterTypeSettings buttonDisabled={buttonDisabled}
-                                 setButtonDisabled={setButtonDisabled}
-            />
-         }
-         {type === "user" &&
-            <CounterTypeUser buttonDisabled={buttonDisabled}
-                             setButtonDisabled={setButtonDisabled}
-            />
-         }
+         { type === "settings" && <CounterTypeSettings /> }
+         { type === "user" && <CounterTypeUser /> }
       </div>
    )
    // return (

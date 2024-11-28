@@ -1,63 +1,18 @@
 import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../../../app/store"
-import { Button } from "../../../../../common/components/Button/Button"
-import { type CounterStateType, setCounterStateAC, setCountUserAC } from "../../../model/counterState-reducer"
-import { DisplayLogicMessageAndError } from "./DisplayLogicMessageAndError/DisplayLogicMessageAndError"
+import { UserDisplayErrorOrMessage } from "./DisplayLogicMessageAndError/UserDisplayErrorOrMessage"
+import { UserButtonInc } from "./UserButtonInc/UserButtonInc"
+import { UserButtonReset } from "./UserButtonReset/UserButtonReset"
 
-type Props = {
-   // message: string
-   buttonDisabled: boolean
-   setButtonDisabled: (buttonDisabled: boolean) => void
-}
-
-// export const CounterTypeUser = ({ message, buttonDisabled, setButtonDisabled }: Props) => {
-export const CounterTypeUser = ({ buttonDisabled, setButtonDisabled }: Props) => {
-   const { countUser, maxValue, startValue } = useSelector<RootState, CounterStateType>((state) => state.counterState)
-
-   const dispatch = useDispatch()
-
-   const objForCheckConditions = {
-      checkIncorrectValuesInc: startValue < 0 || countUser >= maxValue || startValue >= maxValue,
-      // checkIncorrectValuesReset: countUser === startValue || startValue < 0 || startValue >= maxValue
-      checkIncorrectValuesReset: startValue < 0 || startValue >= maxValue
-   }
-
-   const onClickButtonIncHandler = () => {
-      if (countUser < maxValue) {
-         dispatch(setCountUserAC(countUser + 1))
-      }
-   }
-
-   const onClickButtonResetHandler = () => {
-      // debugger
-      // setButtonDisabled(false)
-      dispatch(setCounterStateAC({
-            countUser: startValue,
-            maxValue: maxValue,
-            startValue: startValue
-         })
-      )
-   }
-
+export const CounterTypeUser = () => {
    return (
       <div>
-         <DisplayLogicMessageAndError />
-         {/*<DisplayLogicMessageAndError message={message} />*/}
+         <UserDisplayErrorOrMessage />
 
          <div className="buttons">
-            <Button
-               title={"inc"}
-               onClick={onClickButtonIncHandler}
-               disabled={objForCheckConditions.checkIncorrectValuesInc || buttonDisabled}
-            />
-            <Button
-               title={"reset"}
-               onClick={onClickButtonResetHandler}
-               // disabled={objForCheckConditions.checkIncorrectValuesReset || buttonDisabled}
-               disabled={objForCheckConditions.checkIncorrectValuesReset}
-            />
+            <UserButtonInc/>
+            <UserButtonReset/>
          </div>
       </div>
    )
 }
+
