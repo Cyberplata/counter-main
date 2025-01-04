@@ -1,13 +1,13 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../../../../app/store"
+import { AppRootStateType } from "../../../../../../app/store"
 import { Button } from "../../../../../../common/components/Button/Button"
 import { setCounterStateAC } from "../../../../model/counterNumbersStateReducer"
 
 export const UserButtonReset = () => {
-   const maxValue = useSelector<RootState, number>((state) => state.numbersState.maxValue)
-   const startValue = useSelector<RootState, number>((state) => state.numbersState.startValue)
-   const disabled = useSelector<RootState, boolean>((state) => state.uiState.disabled)
+   const maxValue = useSelector<AppRootStateType, number>((state) => state.numbersState.maxValue)
+   const startValue = useSelector<AppRootStateType, number>((state) => state.numbersState.startValue)
+   const disabled = useSelector<AppRootStateType, boolean>((state) => state.uiState.disabled)
 
    const dispatch = useDispatch()
 

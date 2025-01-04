@@ -1,14 +1,14 @@
 import React, { type ChangeEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../../../../app/store"
+import { AppRootStateType } from "../../../../../../app/store"
 import { Input } from "../../../../../../common/components/Input/Input"
 import { Label } from "../../../../../../common/components/Label/Label"
 import { setMaxValueAC } from "../../../../model/counterNumbersStateReducer"
 import { setUIStateAC } from "../../../../model/counterUIStateReducer"
 
 export const MaxValueInput = () => {
-   const maxValue = useSelector<RootState, number>((state) => state.numbersState.maxValue)
-   const errorClassName = useSelector<RootState, string>((state) => {
+   const maxValue = useSelector<AppRootStateType, number>((state) => state.numbersState.maxValue)
+   const errorClassName = useSelector<AppRootStateType, string>((state) => {
       return state.numbersState.startValue > state.numbersState.maxValue ? "red" : ""
    })
 

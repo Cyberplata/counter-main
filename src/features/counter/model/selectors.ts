@@ -1,7 +1,7 @@
 // selectors.ts
-import type { RootState } from "../../../app/store"
+import type { AppRootStateType } from "../../../app/store"
 
-export const selectIsSetButtonDisabled = (state: RootState) => {
+export const selectIsSetButtonDisabled = (state: AppRootStateType) => {
    // const { maxValue, startValue } = state.counterState
    const maxValue = state.numbersState.maxValue
    const startValue = state.numbersState.startValue

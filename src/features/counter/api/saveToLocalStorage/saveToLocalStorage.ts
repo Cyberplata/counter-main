@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../../app/store"
+import { AppRootStateType } from "../../../../app/store"
 import { type CounterNumbersStateType, setCountUserAC } from "../../model/counterNumbersStateReducer"
 
 export const SaveToLocalStorage = () => {
    // debugger
-   const counterNumbers = useSelector<RootState, CounterNumbersStateType>((state) => state.numbersState)
+   const counterNumbers = useSelector<AppRootStateType, CounterNumbersStateType>((state) => state.numbersState)
 
    const dispatch = useDispatch()
 

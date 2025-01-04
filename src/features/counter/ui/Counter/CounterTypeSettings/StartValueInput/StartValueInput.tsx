@@ -1,14 +1,14 @@
 import React, { type ChangeEvent } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "../../../../../../app/store"
+import { AppRootStateType } from "../../../../../../app/store"
 import { Input } from "../../../../../../common/components/Input/Input"
 import { Label } from "../../../../../../common/components/Label/Label"
 import { setStartValueAC } from "../../../../model/counterNumbersStateReducer"
 import { setUIStateAC } from "../../../../model/counterUIStateReducer"
 
 export const StartValueInput = () => {
-   const startValue = useSelector<RootState, number>((state) => state.numbersState.startValue)
-   const errorClassName = useSelector<RootState, string>((state) => {
+   const startValue = useSelector<AppRootStateType, number>((state) => state.numbersState.startValue)
+   const errorClassName = useSelector<AppRootStateType, string>((state) => {
       return state.numbersState.startValue < 0 || state.numbersState.startValue >= state.numbersState.maxValue || state.numbersState.maxValue < 0 ? "red" : ""
    })
    // const disabled = useSelector<RootState, boolean>((state) => state.uiState.disabled)
