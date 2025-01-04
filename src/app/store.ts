@@ -1,5 +1,5 @@
-import { applyMiddleware, combineReducers, legacy_createStore as createStore, type UnknownAction } from "redux"
-import { thunk, type ThunkAction, type ThunkDispatch } from "redux-thunk"
+import { applyMiddleware, combineReducers, legacy_createStore as createStore } from "redux"
+import { thunk } from "redux-thunk"
 import { loadState, saveState } from "../features/counter/api/utils/localstorage-utils"
 import { counterNumbersStateReducer } from "../features/counter/model/counterNumbersStateReducer"
 import { counterUIStateReducer } from "../features/counter/model/counterUIStateReducer"
@@ -18,10 +18,7 @@ store.subscribe(() => {
    });
 });
 
-// определить автоматически тип всего объекта состояния
-// export type RootState = ReturnType<typeof store.getState>
 export type AppRootStateType = ReturnType<typeof rootReducer>
-// export type AppRootStateType = ReturnType<typeof rootReducer>
 
 // @ts-ignore
 window.store = store

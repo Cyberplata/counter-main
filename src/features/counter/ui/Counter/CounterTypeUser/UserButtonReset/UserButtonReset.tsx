@@ -12,8 +12,6 @@ export const UserButtonReset = () => {
    const dispatch = useDispatch()
 
    const onClickButtonResetHandler = () => {
-      // debugger
-      // setButtonDisabled(false)
       dispatch(setCounterStateAC({
             countUser: startValue,
             maxValue: maxValue,

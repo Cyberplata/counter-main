@@ -17,8 +17,6 @@ export const MaxValueInput = () => {
    const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
       const newMaxValue = Number(e.currentTarget.value)
       dispatch(setMaxValueAC(newMaxValue))
-      // dispatch(setDisabledAC(false))
-      // dispatch(setMessageAC("enter values and press 'set'"))
       dispatch(setUIStateAC({ message: "enter values and press 'set'", disabled: false }))
    }
 

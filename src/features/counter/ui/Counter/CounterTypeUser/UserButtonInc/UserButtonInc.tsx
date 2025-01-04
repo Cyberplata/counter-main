@@ -12,7 +12,6 @@ export const UserButtonInc = () => {
 
    const dispatch = useDispatch()
 
-   // const checkIncorrectValuesInc = startValue < 0 || countUser >= maxValue || startValue >= maxValue
    const checkIncorrectValuesInc = startValue < 0 || countUser > maxValue || startValue >= maxValue
 
    const onClickButtonIncHandler = () => {
@@ -24,7 +23,6 @@ export const UserButtonInc = () => {
    return <Button
       title={"inc"}
       onClick={onClickButtonIncHandler}
-      // disabled={checkIncorrectValuesInc || buttonDisabled}
       disabled={!disabled || checkIncorrectValuesInc}
    />
 }

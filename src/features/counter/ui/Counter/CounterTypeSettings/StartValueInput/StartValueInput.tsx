@@ -11,7 +11,6 @@ export const StartValueInput = () => {
    const errorClassName = useSelector<AppRootStateType, string>((state) => {
       return state.numbersState.startValue < 0 || state.numbersState.startValue >= state.numbersState.maxValue || state.numbersState.maxValue < 0 ? "red" : ""
    })
-   // const disabled = useSelector<RootState, boolean>((state) => state.uiState.disabled)
 
    const dispatch = useDispatch()
 

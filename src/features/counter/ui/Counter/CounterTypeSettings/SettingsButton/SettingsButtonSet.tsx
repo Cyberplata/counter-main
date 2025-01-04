@@ -20,8 +20,6 @@ export const SettingsButtonSet = () => {
             startValue: startValue
          })
       )
-      // dispatch(setDisabledAC(true))
-      // dispatch(setMessageAC(""))
       dispatch(setUIStateAC({ message: "", disabled: true }))
    }
 
@@ -30,7 +28,6 @@ export const SettingsButtonSet = () => {
    return <Button
       title={"set"}
       onClick={onClickButtonSetHandler}
-      // disabled={!buttonDisabled || settingsButtonDisabledAndIncorrectInput}
       disabled={disabled || settingsButtonDisabledAndIncorrectInput}
    />
 }

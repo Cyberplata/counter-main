@@ -2,7 +2,6 @@ import React from "react"
 import "../App.css"
 import { displays } from "../features/counter/model/dispays"
 import { Counter } from "../features/counter/ui/Counter/Counter"
-import { SaveToLocalStorage } from "../features/counter/api/saveToLocalStorage/saveToLocalStorage"
 
 export const AppWithRedux = () => {
    // SaveToLocalStorage();
